@@ -4,10 +4,12 @@ block content
     form(action='/developers/authenticate', method='post')
         
         input(type="text", name="username")
-        input(type="password")
+        input(type="password", name="password")
         input(type="submit", value="Log In as Developer")
         
     if message
         ul
             for error in message
                 li!= error.msg
+    if errorsMessage
+        p Sign In Error #{errorsMessage}
