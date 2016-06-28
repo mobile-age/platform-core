@@ -1,7 +1,12 @@
 var express = require('express');
 var router = express.Router();
 var mysql = require('mysql');
-var credentials = require('../db-credentials')
+
+// Create connection
+var dbcon = require('../models/dbconnect');
+
+// Access database
+var dbHandler = require('../models/dbHandler');
 
 
 router.get('/', function(req, res, next) {
@@ -11,9 +16,16 @@ router.get('/', function(req, res, next) {
 
 router.get('/signIn', function(req, res, next) {
     
-    res.render('developers/signin', {
+    if(req.query.code == 'bad_cred'){
+        res.render('developers/signin', {
+            errorsMessage: 'bad credentials'
+        });
+    }
+    else{
+        res.render('developers/signin', {
             
-    });
+        });
+    }
     
 });
 
@@ -31,42 +43,15 @@ router.post('/authenticate', function(req, res, next) {
     }
     else{
         
-        //var con = require('../models/dbconnect');
-        var con = mysql.createConnection({
+        dbHandler.dbactions.checkIfExists(dbcon, 'dev', req.body.username, req.body.password, function(result){
     
-            host: credentials.host,
-            user: credentials.user,
-            password: credentials.password,
-            database: credentials.db
-
-        });
-        con.connect(function(err){
-            
-            if (!err){
-                
-                console.log('Successful connection');
-                con.query("select * from dev WHERE username='" + req.body.username +"'&&email='" + req.body.password + "';", function(err, rows){
-                    console.log(req.body.password);
-                    console.log(req.body.username);
-                    if(err){
-                        console.log("DB query error");
-                        console.log(err);
-                    }
-                    else{
-                        console.log(rows.length);
-                        if (rows.length > 0){
-                            res.redirect('/developers/container');
-                        }
-                        else{
-                            con.end();
-                            res.render('developers/signin', { errorsMessage: 'Bad Credentials' });
-                        }
-                    }
-                });
+            if(result){
+               
+                return res.redirect('/developers/container');
             }
             else{
-                console.log('Connection with database error occurred');
-                console.log(err);
+                
+                return res.redirect('/developers/signin?code=bad_cred');
             }
 
         });
