@@ -11,14 +11,14 @@ var dbactions = {
             
             if(res == 'error'){
                 
-                return exitCode('error');
+                return exitCode('error_01');
             }
             else{
                 
                 res.query("select * from " + table + " WHERE username='" + username +"'&&email='" + password + "';", function(err, rows){
                 
                     if (err){
-                        return exitCode('error in query');
+                        return exitCode('error_02');
                     }
                     else{
                         

@@ -21,6 +21,16 @@ router.get('/signIn', function(req, res, next) {
             errorsMessage: 'bad credentials'
         });
     }
+    else if(req.query.code == 'error_01'){
+        res.render('developers/signin', {
+            errorsMessage: 'Cannot connect to database - Please try again'
+        });
+    }
+    else if(req.query.code == 'error_02'){
+        res.render('developers/signin', {
+            errorsMessage: 'Internal error'
+        });
+    }
     else{
         res.render('developers/signin', {
             
@@ -45,13 +55,18 @@ router.post('/authenticate', function(req, res, next) {
         
         dbHandler.dbactions.checkIfExists(dbcon, 'dev', req.body.username, req.body.password, function(result){
     
-            if(result){
-               
+            if(result == true){
+                console.log(result);
                 return res.redirect('/developers/container');
+            }
+            else if(result == false){
+                
+                return res.redirect('/developers/signin?code=bad_cred');
             }
             else{
                 
-                return res.redirect('/developers/signin?code=bad_cred');
+                return res.redirect('/developers/signin?code=' + result);
+                
             }
 
         });
