@@ -23,8 +23,11 @@ coverage
 # Compiled binary addons (http://nodejs.org/api/addons.html)
 build/Release
 
-# Dependency directory
+# Dependency directory - npm
 node_modules
+
+# Dependency directory - bower
+public/bower_components
 
 # Optional npm cache directory
 .npm
@@ -33,7 +36,7 @@ node_modules
 .node_repl_history
 
 # Database Credentials
-.db-credentials.js
+db-credentials.js
 
 # sudoer credentials
 scripts/config.sh

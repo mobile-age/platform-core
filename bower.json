@@ -1,0 +1,12 @@
+{
+    "name": "mobile-age-platform",
+    "private": true,
+    "directory": "public/",
+    "dependencies": {
+        
+        "angular": "^1.5.0",
+        "bootstrap": "^3.3.6"
+        
+    }
+    
+}
