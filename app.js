@@ -5,7 +5,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var expValidator = require('express-validator');
-
+var session = require('express-session');
 
 var routes = require('./routes/index');
 var developers = require('./routes/developers');
@@ -28,9 +28,17 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(expValidator())
 
+app.use(session({
+    
+    secret: "mobile_age_secret",
+    resave: true,
+    saveUninitialized: true,
+    cookie: { maxAge: 6000000 }
+    
+}));
+
 app.use('/', routes);
 app.use('/developers', developers);
-
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

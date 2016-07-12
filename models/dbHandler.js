@@ -23,7 +23,7 @@ var dbactions = {
                     else{
                         
                         if (rows.length > 0){
-                            return exitCode(true);
+                            return exitCode(rows);
                         }
                         else{
                             return exitCode(false);

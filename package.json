@@ -14,6 +14,7 @@
         "morgan": "~1.6.1",
         "serve-favicon": "~2.3.0",
         "express-validator": "0.6.0",
+        "express-session": "^1.7.6",
         "mysql": "~2.11.1",
         "bower": "^1.7.9"
   }
