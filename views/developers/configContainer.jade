@@ -8,6 +8,7 @@ block content
         option container 2
         option container 3
         option container 4
-
-    button.btn.btn-primary(type='button', onclick='deploy_container($("#sel1 option:selected").text())') Deploy Selected Container
+    
+    form(action='/containers/deploy?containerId=sampleId', method='post')
+        button.btn.btn-primary(type='submit') Deploy Selected Container
         

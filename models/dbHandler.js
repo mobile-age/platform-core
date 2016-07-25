@@ -15,7 +15,7 @@ var dbactions = {
             }
             else{
                 
-                res.query("select * from " + table + " WHERE username='" + username +"'&&email='" + password + "';", function(err, rows){
+                res.query("select * from " + table + " WHERE username='" + username +"'&&password='" + password + "';", function(err, rows){
                 
                     if (err){
                         return exitCode('error_02');

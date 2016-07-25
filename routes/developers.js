@@ -8,7 +8,6 @@ var dbcon = require('../models/dbconnect');
 // Access database
 var dbHandler = require('../models/dbHandler');
 
-var contController = require('../public/controllers/container/container.controller');
 
 router.get('/', function(req, res, next) {
   res.send('respond with a resource');
@@ -54,14 +53,14 @@ router.post('/authenticate', function(req, res, next) {
     }
     else{
         
-        dbHandler.dbactions.checkIfExists(dbcon, 'dev', req.body.username, req.body.password, function(result){
+        dbHandler.dbactions.checkIfExists(dbcon, 'developers', req.body.username, req.body.password, function(result){
     
             if(typeof result == 'object'){
                 
                 req.session.developer = result[0]['username'];
                 //console.log(result);
                 
-                return res.redirect('/developers/container');
+                return res.redirect('/containers/config');
             }
             else if(result == false){
                 
@@ -76,18 +75,6 @@ router.post('/authenticate', function(req, res, next) {
     }   
 });
 
-
-router.get('/container', function(req, res, next) {
-    
-    if (req.session.developer){
-        
-        //console.log(req.session.developer);
-    }
-    
-    res.render('developers/configContainer', {
-        
-    });
-});
 
 
 module.exports = router;
