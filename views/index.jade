@@ -14,13 +14,14 @@ block content
                   img(src="/images/index.png" width="100%")
               .col-md-5.ma-hero-right
                 .ma-hero-text
-                  h1.margin-bottom-30 Welcome to Mobile-Age
-                  button(type="button" class="ma-button") Sign in as Developer
-                  .ma-separator OR
-                  button(type="button" class="ma-button") Sign in as Open Data Provider
-                  hr
-                  p.margin-top-10 Don't have an account?
-                  a Register Now
+                  .ma-hero-text-content
+                    h1.margin-bottom-30 Welcome to Mobile-Age
+                    a(href="/developers/signIn" class="ma-button") Sign in as Developer
+                    .ma-separator OR
+                    a(href="" class="ma-button") Sign in as ODP
+                  .ma-hero-text-footer
+                    p.no-margin Don't have an account? 
+                      a Register Now
                   
   include ./static_content/footer
     

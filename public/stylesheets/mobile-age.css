@@ -33,6 +33,7 @@
 }
 
 .ma-button {
+  min-width: 200px;
   margin: 0 5px 10px;
   padding: 10px 15px;
   display: inline-block;
@@ -40,7 +41,7 @@
   color: #FFFFFF;
   font-size: 15px;
   font-weight: 500;
-  text-transform: none;
+  text-transform: capitalize;
   line-height: 20px;
   border: none;
   border-bottom: 2px solid rgba(45,81,91, 0.3);
@@ -49,6 +50,15 @@
   -o-transition: all 0.3s ease-in-out;
   -ms-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
+}
+
+.ma-button:hover,
+.ma-button:focus,
+.ma-button:active,
+.ma-button:visited {
+  background-color: #469AAF;
+  color: #FFFFFF;
+  text-decoration: none;
 }
 
 
@@ -68,6 +78,7 @@
  *-----------------------------------*/
  #ma-main-nav.navbar {
    min-height: 80px;
+   margin: 0;
    border: none;
    border-bottom: 3px solid #DDDDDD;
  }
@@ -119,8 +130,28 @@
 * 4.0 Main Content
 * -----------------------------------------------------------------------------
 */
-.ma-content-area {
+
+.ma-content-area.ma-top-80 {
+  padding-top: 80px;
+}
+
+.ma-content-area.ma-colored {
+  background-color: #469AAF;
+}
+
+.ma-content-area.ma-bottom-80 {
+  padding-bottom: 80px;
+}
+
+.ma-content-area.ma-height100 {
   min-height: 100vh;
+}
+
+.ma-section {
+  margin: 0;
+  padding: 80px 0;
+  position: relative;
+  text-align: center;
 }
 
 /*-------------------------------------
@@ -153,16 +184,26 @@
  }
 
  .ma-hero-text {
-   padding: 60px 25px;
    background-color: #F9F6F7;
    box-shadow: 1px 4px 8px rgba(0,0,0,0.4);
+ }
+
+ .ma-hero-text-content {
+   padding: 60px 25px 40px;
+ }
+
+ .ma-hero-text-footer {
+   padding: 20px 25px;
+   background-color: #DDDDDD;
+   border-top: 1px solid #CCCCCC;
  }
 
  .ma-hero-text .ma-separator {
    width: 30px;
    height: 30px;
    margin: 10px auto 20px;
-   background-color: #2D515B;
+   position: relative;
+   background-color: #D0D0D0;
    color: #FFFFFF;
    font-size: 12px;
    font-weight: 600;
@@ -170,13 +211,84 @@
    border-radius: 50px;
  }
 
+ .ma-hero-text .ma-separator::before {
+   content: "";
+   width: 30px;
+   height: 1px;
+   position: absolute;
+   top: 15px;
+   left: -120%;
+   background-color: #D0D0D0;
+ }
+
+ .ma-hero-text .ma-separator::after {
+   content: "";
+   width: 30px;
+   height: 1px;
+   position: absolute;
+   top: 15px;
+   right: -120%;
+   background-color: #D0D0D0;
+ }
+
+ /*-------------------------------------
+  * 4.2 Sign In
+  *-----------------------------------*/
+  #ma-signin {
+    width: 100%;
+    height: 100%;
+  }
+
+  #ma-signin .ma-signin-container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    text-align: center;
+    z-index: 1;
+  }
+
+  #ma-signin .ma-signin-form-container {
+    max-width: 480px;
+    margin: 0 auto;
+    background-color: #F9F6F7;
+    box-shadow: 1px 4px 8px rgba(0,0,0,0.4);
+  }
+
+  .ma-signin-form-content {
+    padding: 60px 25px 40px;
+  }
+
+  .ma-signin-form-footer {
+    padding: 20px 25px;
+    background-color: #DDDDDD;
+    border-top: 1px solid #CCCCCC;
+  }
+
+  #ma-signin form .form-group {
+    position: relative;
+  }
+
+  #ma-signin .ma-signin-icon {
+    width: 30px;
+    height: 30px;
+    padding: 7px 7px;
+    position: absolute;
+    left: -55px;
+    top: 24px;
+    background-color: #525252;
+    color: #FFFFFF;
+    font-size: 16px;
+    text-align: center;
+  }
+
+
 /*-----------------------------------------------------------------------------
 * 5.0  Footer
 * -----------------------------------------------------------------------------
 */
 #ma-footer {
   width: 100%;
-  padding: 15px 0;
+  padding: 20px 0;
   position: absolute;
   left: 0;
   bottom: 0;

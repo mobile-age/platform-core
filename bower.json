@@ -1,11 +1,9 @@
 {
-    "name": "mobile-age-platform",
-    "private": true,
-    "dependencies": {
-        
-        "angular": "^1.5.0",
-        "bootstrap": "^3.3.6"
-        
-    }
-    
+  "name": "mobile-age-platform",
+  "private": true,
+  "dependencies": {
+    "angular": "^1.5.0",
+    "bootstrap": "^3.3.6",
+    "font-awesome": "^4.6.3"
+  }
 }
