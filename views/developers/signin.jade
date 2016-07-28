@@ -1,9 +1,8 @@
 extends ../layout
 
 block content
-  include ../static_content/navbar
 
-  .ma-content-area.ma-colored.ma-top-80.ma-height100
+  .ma-content-area.ma-colored.ma-top-80.ma-bottom-80.ma-height100
     section.ma-section#ma-signin
       .container.ma-signin-container
         .row
@@ -13,11 +12,12 @@ block content
                 h1.margin-bottom-30 Login As Developer
                 form(action="/developers/authenticate" method="post" name="signin-form" role="form")
                   if message
-                    ul
-                      for error in message
-                        li!= error.msg
+                    .alert.alert-danger.ma-alert
+                      ul
+                        for error in message
+                          li!= error.msg
                   if errorsMessage
-                    p Sign In` Error #{errorsMessage}
+                    p Sign In Error #{errorsMessage}
                   .form-group.text-left.ma-relative-pos
                     label 
                       i(class="fa fa-user ma-signin-icon") 
@@ -34,4 +34,3 @@ block content
                 p.no-margin Don't have an account? 
                   a Register Now
                   
-  include ../static_content/footer

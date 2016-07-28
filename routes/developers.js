@@ -13,12 +13,11 @@ router.get('/', function(req, res, next) {
   res.send('respond with a resource');
 });
 
-
 router.get('/signIn', function(req, res, next) {
-    
+
     if(req.query.code == 'bad_cred'){
         res.render('developers/signin', {
-            errorsMessage: 'bad credentials'
+            errorsMessage: 'Bad credentials'
         });
     }
     else if(req.query.code == 'error_01'){
@@ -31,19 +30,17 @@ router.get('/signIn', function(req, res, next) {
             errorsMessage: 'Internal error'
         });
     }
-    else{
+    else {
         res.render('developers/signin', {
-            
         });
     }
-    
+
 });
 
-
 router.post('/authenticate', function(req, res, next) {
-    
-    req.checkBody('username', "username can't be empty").notEmpty();
-    req.checkBody('password', "password can't be empty").notEmpty();
+
+    req.checkBody('username', "Username can't be empty").notEmpty();
+    req.checkBody('password', "Password can't be empty").notEmpty();
 
     const errors = req.validationErrors();
     if (errors){
@@ -52,29 +49,34 @@ router.post('/authenticate', function(req, res, next) {
         });
     }
     else{
-        
+
         dbHandler.dbactions.checkIfExists(dbcon, 'developers', req.body.username, req.body.password, function(result){
-    
+
             if(typeof result == 'object'){
-                
+
                 req.session.developer = result[0]['username'];
                 //console.log(result);
-                
+
                 return res.redirect('/containers/config');
             }
             else if(result == false){
-                
+
                 return res.redirect('/developers/signin?code=bad_cred');
             }
             else{
-                
+
                 return res.redirect('/developers/signin?code=' + result);
-                
+
             }
-        });        
-    }   
+        });
+    }
 });
 
+router.get('/dashboard', function(req, res, next) {
+  
+  res.render('developers/dashboard', {
+  });
 
+});
 
 module.exports = router;

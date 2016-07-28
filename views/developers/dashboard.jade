@@ -1,0 +1,53 @@
+extends ../layout
+
+block content
+  .ma-content-area.ma-top-80.ma-bottom-80
+    section.ma-section.ma-dashboard
+      .fluid-container
+        .row
+          .col-md-2.col-sm-3.ma-dashboard-sidebar
+            h2 Dashboard
+            ul(class="nav nav-pills nav-stacked")
+              li.active
+                a(data-toggle="tab" href="#tab1")
+                  i(class="fa fa-file-code-o" aria-hidden="true")
+                  span.title My App
+              li
+                a(data-toggle="tab" href="#tab2")
+                  i(class="fa fa-cogs" aria-hidden="true")
+                  span.title Services
+              li
+                a(data-toggle="tab" href="#tab3")
+                  i(class="fa fa-tablet" aria-hidden="true")
+                  span.title Front Ends
+              li
+                a(data-toggle="tab" href="#tab4")
+                  i(class="fa fa-database" aria-hidden="true")
+                  span.title Open Data
+          .col-md-10.col-sm-9.ma-dashboard-content
+            .tab-content
+              div(id="tab1" class="tab-pane fade in active")
+                  ul(class="nav nav-tabs ma-nav-tabs")
+                    li.active
+                      a(data-toggle="tab" href="#1") My Container
+                    li
+                      a(data-toggle="tab" href="#2") Source Code
+                    li
+                      a(data-toggle="tab" href="#3") Activity
+                    li
+                      a(data-toggle="tab" href="#4") Logs
+                  .tab-content
+                    div(id="1" class="tab-pane fade in active")
+                      h3 My container
+                    div(id="2" class="tab-pane fade")
+                      h3 Source code
+                    div(id="3" class="tab-pane fade")
+                      h3 Activity
+                    div(id="4" class="tab-pane fade")
+                      h3 Logs
+              div(id="tab2" class="tab-pane fade")
+                h3 Services
+              div(id="tab3" class="tab-pane fade")
+                h3 Front ends
+              div(id="tab4" class="tab-pane fade")
+                h3 Open Data

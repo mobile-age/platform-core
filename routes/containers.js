@@ -11,25 +11,24 @@ var dbHandler = require('../models/dbHandler');
 
 
 router.get('/config', function(req, res, next) {
-    
-    if (req.session.developer){
-        
+
+    if (req.session.developer) {
         console.log(req.session.developer);
     }
-    
+
     res.render('developers/configContainer', {
-        
+
     });
 });
 
 router.post('/deploy', function(req, res, next) {
-    
-        
+
+
     console.log(req.query.code);
-    
-    
+
+
     res.render('developers/configContainer', {
-        
+
     });
 });
 
