@@ -61,6 +61,14 @@
   text-decoration: none;
 }
 
+.ma-width-100 {
+  width: 100%;
+}
+
+.ma-height-100 {
+  width: 100%;
+}
+
 
 /*-----------------------------------------------------------------------------
 * 2.0 Navigations
@@ -76,14 +84,26 @@
 /*-------------------------------------
  * 2.2 Menus
  *-----------------------------------*/
+
  #ma-main-nav.navbar {
    min-height: 80px;
    margin: 0;
+   padding: 0 5px;
    border: none;
    box-shadow: 0px 1px 10px 0px rgba(50,50,50,0.4);
  }
 
  #ma-main-nav.navbar-default {
+   background-color: #FFFFFF;
+ }
+
+ #ma-main-nav .navbar-toggle {
+   margin: 23px 15px 23px 0;
+   background-color: #525252;
+   border-radius: 0;
+ }
+
+ #ma-main-nav .navbar-toggle .icon-bar {
    background-color: #FFFFFF;
  }
 
@@ -95,22 +115,90 @@
    margin-right: 0 !important;
  }
 
+ #ma-main-nav .navbar-header {
+   padding-left: 15px;
+ }
+
  #ma-main-nav .navbar-brand {
    height: auto;
-   padding: 10px 15px;
+   padding: 20px 15px;
    display: block;
    float: left;
  }
 
- #ma-main-nav .navbar-brand h5 {
-   margin: 5px 0 0;
-   font-size: 13.5px;
-   font-weight: 600;
-   text-transform: capitalize;
- }
-
  #ma-main-nav .navbar-nav > li > a {
    color: #525252;
+ }
+
+ #ma-main-nav .ma-dev-settings {
+   padding: 10px 20px;
+   position: relative;
+   float: right;
+   text-align: center;
+ }
+
+ #ma-main-nav .ma-dev-settings a {
+   color: #525252;
+   -webkit-transition: all 0.3s ease-in-out;
+   -moz-transition: all 0.3s ease-in-out;
+   -o-transition: all 0.3s ease-in-out;
+   -ms-transition: all 0.3s ease-in-out;
+   transition: all 0.3s ease-in-out;
+ }
+
+ #ma-main-nav .ma-dev-settings a:hover {
+   text-decoration: none;
+   opacity: 0.8;
+ }
+
+ #ma-main-nav .dropdown-menu {
+   right: 20px;
+   left: auto;
+   background-color: #525252;
+   border-radius: 0;
+   border: none;
+ }
+
+ #ma-main-nav .dropdown-menu > li {
+   border-top: 1px solid #666666;
+ }
+
+ #ma-main-nav .dropdown-menu > li:first-child {
+   border-top: none;
+ }
+
+ #ma-main-nav .dropdown-menu > li > a {
+   padding: 5px 10px;
+   color: #FFFFFF;
+ }
+
+ #ma-main-nav .dropdown-menu > li > a:hover {
+   background-color: inherit;
+   color: #FFFFFF;
+ }
+
+ #ma-main-nav .ma-dev-settings > a > i {
+   font-size: 40px;
+   line-height: 40px;
+ }
+
+ #ma-main-nav .ma-dev-settings:before {
+   content: "";
+   width: 8px;
+   height: 8px;
+   margin-left: -4px;
+   position: absolute;
+   top: 22px;
+   left: 50%;
+   background-color: #469AAF;
+   border-radius: 5px;
+ }
+
+ #ma-main-nav .ma-dev-settings .name {
+   padding: 0;
+   display: block;
+   font-size: 13px;
+   line-height: 16px;
  }
 
 
@@ -123,6 +211,9 @@
   position: fixed;
   background-color: #FFFFFF;
   z-index: 9998;
+}
+
+#ma-header-container {
 }
 
 
@@ -235,7 +326,7 @@
  .ma-hero-text-footer {
    padding: 20px 25px;
    background-color: #DDDDDD;
-   border-top: 1px solid #CCCCCC;
+   border-top: 1px solid #D0D0D0;
  }
 
  .ma-hero-text .ma-separator {
@@ -301,7 +392,7 @@
   .ma-signin-form-footer {
     padding: 20px 25px;
     background-color: #DDDDDD;
-    border-top: 1px solid #CCCCCC;
+    border-top: 1px solid #D0D0D0;
   }
 
   #ma-signin form .form-group {
@@ -336,7 +427,7 @@
 
   .ma-dashboard  .ma-dashboard-sidebar {
     min-height: 100vh;
-    padding: 0 0 60px;
+    padding: 0;
     position: relative;
     background-color: #469AAF;
   }
@@ -382,7 +473,15 @@
   }
 
   .ma-dashboard  .ma-dashboard-content {
-    padding: 0 60px;
+    padding: 0 40px;
+  }
+
+  .ma-dashboard  .ma-dashboard-content .tab-content {
+    border: 1px solid #DDDDDD;
+  }
+
+  .ma-dashboard  .ma-dashboard-content > .tab-content {
+    border: none;
   }
 
 
@@ -392,14 +491,15 @@
 */
 #ma-footer {
   width: 100%;
-  padding: 20px 0;
+  height: 80px;
+  padding: 20px 20px;
   position: absolute;
   left: 0;
   bottom: 0;
   background-color: #FFFFFF;
   font-size: 13px;
   line-height: 19px;
-  border-top: 3px solid #DDDDDD;
+  border-top: 1px solid #D0D0D0;
   z-index: 999;
 }
 
@@ -492,6 +592,14 @@
 
 /* Small Devices, Tablets */
 @media (max-width : 767px) {
+
+  .ma-dashboard  .ma-dashboard-sidebar {
+    min-height: auto;
+  }
+
+  .ma-dashboard-sidebar h2 {
+    text-align: center;
+  }
 
 }
 

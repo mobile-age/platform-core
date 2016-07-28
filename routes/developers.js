@@ -73,8 +73,9 @@ router.post('/authenticate', function(req, res, next) {
 });
 
 router.get('/dashboard', function(req, res, next) {
-  
+
   res.render('developers/dashboard', {
+    login: true
   });
 
 });
