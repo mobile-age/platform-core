@@ -3,10 +3,12 @@ extends ../layout
 block content
   .ma-content-area.ma-top-80.ma-bottom-80(ng-controller="DevDashboardCtrl as devDashboardCtrl")
     section.ma-section.ma-dashboard
-      .fluid-container
-        .row
+      .fluid-container.ma-height-100
+        .row.ma-height-100
           .ma-dashboard-sidebar
-            h2 Dashboard
+            h2 
+              i(class="fa fa-cog")
+              |  Dashboard
             ul(class="nav nav-pills nav-stacked")
               li.active
                 a(data-toggle="tab" href="#tab1")
@@ -50,25 +52,29 @@ block content
                                     option container 3
                                     option container 4
                             .col-md-6
-                              button(type="submit" class="ma-button margin-top-20") Deploy Selected Container
+                              button(type="submit" class="ma-button margin-top-20") Launch Container
                         .ma-container-config-content
                           .row
                             .col-md-12.padding-top-20.padding-bottom-20.text-left
                               h3 Operating System
                               ul.margin-top-20.clearfix
                                li 
-                                img(src="/images/ubuntu.jpeg" height="70")
+                                h4 Ubuntu
+                                img(src="/images/ubuntu.png" height="70")
                                 button(popover-animation="true" uib-popover="{{ devDashboardCtrl.info }}" type="button" class="ma-button ma-button-xs") More info
                             .col-md-12.padding-top-20.padding-bottom-20.text-left
                               h3 Development Tools
                               ul.margin-top-20.clearfix
                                 li 
+                                  h4 Java
                                   img(src="/images/java.png" height="70")
                                   button(popover-animation="true" uib-popover="{{ devDashboardCtrl.info }}" type="button" class="ma-button ma-button-xs") More info
                                 li 
+                                  h4 NodeJS
                                   img(src="/images/nodejs.png" height="70")
                                   button(popover-animation="true" uib-popover="{{ devDashboardCtrl.info }}" type="button" class="ma-button ma-button-xs") More info
                                 li 
+                                  h4 PHP
                                   img(src="/images/php.png" height="70")
                                   button(popover-animation="true" uib-popover="{{ devDashboardCtrl.info }}" type="button" class="ma-button ma-button-xs") More info
                     div(id="2" class="tab-pane fade")

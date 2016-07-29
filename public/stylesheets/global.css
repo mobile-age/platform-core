@@ -326,6 +326,7 @@ del {
 }
 
 label {
+  margin-bottom: 4px;
   display: inline-block;
   font-weight: bold;
 }
@@ -593,4 +594,9 @@ button {
 .popover {
   padding: 8px 8px;
   border-radius: 0;
+  box-shadow: 1px 1px 4px rgba(0,0,0,0.23);
+}
+
+.popover.top {
+    margin-top: -15px;
 }
