@@ -61,6 +61,17 @@
   text-decoration: none;
 }
 
+.ma-button-default {
+  background-color: #DDDDDD;
+  border-bottom: 2px solid rgba(50,50,50,0.3);
+  color: #525252;
+}
+
+.ma-button-xs {
+  min-width: auto;
+  padding: 5px 8px;
+}
+
 .ma-width-100 {
   width: 100%;
 }
@@ -421,14 +432,13 @@
     position: relative;
   }
 
-  .ma-dashboard div {
-    min-height: 100%;
-  }
-
   .ma-dashboard  .ma-dashboard-sidebar {
-    min-height: 100vh;
+    width: 240px;
+    height: 100%;
     padding: 0;
-    position: relative;
+    position: absolute;
+    left: 0;
+    top: 0;
     background-color: #469AAF;
   }
 
@@ -473,6 +483,7 @@
   }
 
   .ma-dashboard  .ma-dashboard-content {
+    margin-left: 240px;
     padding: 0 40px;
   }
 
@@ -482,6 +493,43 @@
 
   .ma-dashboard  .ma-dashboard-content > .tab-content {
     border: none;
+  }
+
+  .ma-dashboard .ma-container-config .ma-container-config-header {
+    padding-bottom: 40px;
+    border-bottom: 4px double #525252;
+  }
+
+  .ma-dashboard .ma-container-config .ma-container-config-content {
+    padding-top: 40px;
+    position: relative;
+  }
+
+  .ma-dashboard .ma-container-config .ma-container-config-content::after {
+    content: "";
+    width: 0;
+    height: 0;
+    position: absolute;
+    top: 0px;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-top: 8px solid #525252;
+  }
+
+  .ma-dashboard .ma-container-config .ma-container-config-content ul {
+    list-style: none;
+  }
+
+  .ma-dashboard .ma-container-config .ma-container-config-content ul li {
+    padding: 20px 30px;
+    float: left;
+    font-size: 32px;
+    text-align: center;
+  }
+
+  .ma-dashboard .ma-container-config .ma-container-config-content ul li button {
+    margin: 25px auto 0;
+    display: block;
   }
 
 

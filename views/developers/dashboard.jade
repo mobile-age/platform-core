@@ -1,11 +1,11 @@
 extends ../layout
 
 block content
-  .ma-content-area.ma-top-80.ma-bottom-80
+  .ma-content-area.ma-top-80.ma-bottom-80(ng-controller="DevDashboardCtrl as devDashboardCtrl")
     section.ma-section.ma-dashboard
       .fluid-container
         .row
-          .col-md-2.col-sm-3.ma-dashboard-sidebar
+          .ma-dashboard-sidebar
             h2 Dashboard
             ul(class="nav nav-pills nav-stacked")
               li.active
@@ -24,7 +24,7 @@ block content
                 a(data-toggle="tab" href="#tab4")
                   i(class="fa fa-database" aria-hidden="true")
                   span.title Open Data
-          .col-md-10.col-sm-9.ma-dashboard-content
+          .ma-dashboard-content
             .tab-content
               div(id="tab1" class="tab-pane fade in active")
                   ul(class="nav nav-tabs ma-nav-tabs")
@@ -38,7 +38,39 @@ block content
                       a(data-toggle="tab" href="#4") Logs
                   .tab-content
                     div(id="1" class="tab-pane fade in active")
-                      h3 My container
+                      .ma-container-config
+                        .ma-container-config-header.clearfix
+                          form(action="/containers/deploy?containerId=sampleId" method="post")
+                            .col-md-6
+                              .form-group.text-left 
+                                label Select preconfigured container (select one):
+                                select#sel1.form-control
+                                    option container 1
+                                    option container 2
+                                    option container 3
+                                    option container 4
+                            .col-md-6
+                              button(type="submit" class="ma-button margin-top-20") Deploy Selected Container
+                        .ma-container-config-content
+                          .row
+                            .col-md-12.padding-top-20.padding-bottom-20.text-left
+                              h3 Operating System
+                              ul.margin-top-20.clearfix
+                               li 
+                                img(src="/images/ubuntu.jpeg" height="70")
+                                button(popover-animation="true" uib-popover="{{ devDashboardCtrl.info }}" type="button" class="ma-button ma-button-xs") More info
+                            .col-md-12.padding-top-20.padding-bottom-20.text-left
+                              h3 Development Tools
+                              ul.margin-top-20.clearfix
+                                li 
+                                  img(src="/images/java.png" height="70")
+                                  button(popover-animation="true" uib-popover="{{ devDashboardCtrl.info }}" type="button" class="ma-button ma-button-xs") More info
+                                li 
+                                  img(src="/images/nodejs.png" height="70")
+                                  button(popover-animation="true" uib-popover="{{ devDashboardCtrl.info }}" type="button" class="ma-button ma-button-xs") More info
+                                li 
+                                  img(src="/images/php.png" height="70")
+                                  button(popover-animation="true" uib-popover="{{ devDashboardCtrl.info }}" type="button" class="ma-button ma-button-xs") More info
                     div(id="2" class="tab-pane fade")
                       h3 Source code
                     div(id="3" class="tab-pane fade")
