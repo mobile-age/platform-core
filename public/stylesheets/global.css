@@ -48,7 +48,7 @@ time, mark, audio, video {
 html {
   margin: 0;
   padding: 0;
-  font-family: "Lato", Helvetica, Arial, sans-serif;
+  font-family: "Open Sans", Helvetica, Arial, sans-serif;
   font-size: 14px;
   font-weight: normal;
 }
@@ -62,9 +62,9 @@ body {
 body {
   width: 100%;
   min-height: 100vh;
-  background-color: #ffffff;
-  color: #525252;
-  font-family: "Lato", Helvetica, Arial, sans-serif;
+  background-color: #FFFFFF;
+  color: #303031;
+  font-family: "Open Sans", Helvetica, Arial, sans-serif;
   font-size: 14.5px;
   font-weight: 400;
   line-height: 1.6;
@@ -128,6 +128,7 @@ a:hover,
 a:focus,
 a:active,
 a:visited {
+  color: #469AAF;
   text-decoration: none;
   outline: 0;
 }
@@ -148,18 +149,22 @@ button,
 input,
 select,
 textarea {
-  color: #292424;
-  font-family: "Lato", Helvetica, Arial, sans-serif;
+  color: #303031;
+  font-family: "Open Sans", Helvetica, Arial, sans-serif;
   font-size: 14px;
   line-height: 1.6em;
 }
 
 h1, h2, h3, h4, h5, h6 {
   margin-top: 0;
-  color: #555555;
-  font-family: Raleway, Helvetica, Arial, sans-serif;
+  color: #303031;
+  font-family: "Lato", Helvetica, Arial, sans-serif;
   font-weight: 700;
   line-height: 1.4em;
+}
+
+h4, h5, h6 {
+  font-weight: 500;
 }
 
 h1 {
@@ -242,7 +247,7 @@ hr {
   margin-top: 20px;
   margin-bottom: 20px;
   border: 0;
-  border-top: 1px solid #e0e0e0;
+  border-top: 1px solid #E0E0E0;
 }
 
 ul,
@@ -302,10 +307,6 @@ td {
   text-align: left;
 }
 
-td.highlighted {
-  background-color: #e9e9e9;
-}
-
 img {
   vertical-align: middle;
   border: 0;
@@ -328,7 +329,7 @@ del {
 label {
   margin-bottom: 4px;
   display: inline-block;
-  font-weight: bold;
+  font-weight: 600;
 }
 
 
@@ -587,10 +588,13 @@ button {
 * 7.0 Basic Structure
 * -----------------------------------------------------------------------------
 */
+
+/* Tabs */
 .tab-content {
   padding: 40px 25px;
 }
 
+/* Popover */
 .popover {
   padding: 8px 8px;
   border-radius: 0;

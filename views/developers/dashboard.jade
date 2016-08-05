@@ -41,18 +41,19 @@ block content
                   .tab-content
                     div(id="1" class="tab-pane fade in active")
                       .ma-container-config
-                        .ma-container-config-header.clearfix
-                          form(action="/containers/deploy?containerId=sampleId" method="post")
-                            .col-md-6
-                              .form-group.text-left 
-                                label Select preconfigured container (select one):
-                                select#sel1.form-control
-                                    option container 1
-                                    option container 2
-                                    option container 3
-                                    option container 4
-                            .col-md-6
-                              button(type="submit" class="ma-button margin-top-20") Launch Container
+                        .ma-container-config-header
+                          .row.clearfix
+                            form(action="/containers/deploy?containerId=sampleId" method="post")
+                              .col-md-6
+                                .form-group.text-left 
+                                  label Select preconfigured container (select one):
+                                  select#sel1.form-control
+                                      option container 1
+                                      option container 2
+                                      option container 3
+                                      option container 4
+                              .col-md-6
+                                button(type="submit" class="ma-button margin-top-20") Launch Container
                         .ma-container-config-content
                           .row
                             .col-md-12.padding-top-20.padding-bottom-20.text-left

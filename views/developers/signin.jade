@@ -9,15 +9,18 @@ block content
           .col-md-6.col-md-offset-3.col-sm-8.col-sm-offset-2.col-xs-10.col-xs-offset-1
             .ma-signin-form-container
               .ma-signin-form-content
-                h1.margin-bottom-30 Login As Developer
+                h1.margin-bottom-30 Sign In As Developer
                 form(action="/developers/authenticate" method="post" name="signin-form" role="form")
                   if message
                     .alert.alert-danger.ma-alert
+                      p.margin-bottom-5 Validation errors exist:
                       ul
                         for error in message
                           li!= error.msg
                   if errorsMessage
-                    p Sign In Error #{errorsMessage}
+                    .alert.alert-danger.ma-alert
+                      ul
+                        li Sign In Error: #{errorsMessage}
                   .form-group.text-left.ma-relative-pos
                     label 
                       i(class="fa fa-user ma-signin-icon") 
@@ -29,7 +32,7 @@ block content
                       | Password  
                     input(type="password" class="form-control" name="password")
                   .form-group
-                    input(type="submit" class="ma-button" value="Log In")
+                    input(type="submit" class="ma-button margin-top-20" value="Sign In")
               .ma-signin-form-footer
                 p.no-margin Don't have an account? 
                   a Register Now

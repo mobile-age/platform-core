@@ -33,18 +33,19 @@
 }
 
 .ma-button {
-  min-width: 200px;
+  min-width: 180px;
   margin: 0 5px 10px;
   padding: 10px 15px;
+  position: relative;
   display: inline-block;
   background-color: #469AAF;
   color: #FFFFFF;
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 500;
   text-transform: capitalize;
   line-height: 20px;
   border: none;
-  border-bottom: 2px solid rgba(45,81,91, 0.3);
+  border-bottom: 2px solid rgba(45,81,91,0.2);
   -webkit-transition: all 0.3s ease-in-out;
   -moz-transition: all 0.3s ease-in-out;
   -o-transition: all 0.3s ease-in-out;
@@ -59,12 +60,13 @@
   background-color: #469AAF;
   color: #FFFFFF;
   text-decoration: none;
+  border-bottom: 2px solid rgba(45,81,91,0.5);
 }
 
 .ma-button-default {
   background-color: #DDDDDD;
   border-bottom: 2px solid rgba(50,50,50,0.3);
-  color: #525252;
+  color: #303031;
 }
 
 .ma-button-xs {
@@ -101,8 +103,9 @@
    min-height: 80px;
    margin: 0;
    padding: 0 5px;
+   font-size: 14px;
    border: none;
-   box-shadow: 0px 1px 10px 0px rgba(50,50,50,0.4);
+   box-shadow: 0px 1px 6px 0px rgba(50,50,50,0.4);
  }
 
  #ma-main-nav.navbar-default {
@@ -111,7 +114,7 @@
 
  #ma-main-nav .navbar-toggle {
    margin: 23px 15px 23px 0;
-   background-color: #525252;
+   background-color: #303031;
    border-radius: 0;
  }
 
@@ -139,7 +142,23 @@
  }
 
  #ma-main-nav .navbar-nav > li > a {
-   color: #525252;
+   color: #303031;
+   border-bottom: 2px solid transparent;
+ }
+
+ #ma-main-nav .navbar-nav > li > a::before {
+   content: "";
+   width: 0;
+   height: 3px;
+   display: block;
+   position: absolute;
+   bottom: 3px;
+   background-color: #469AAF;
+   transition: all 0.2s ease;
+ }
+
+ #ma-main-nav .navbar-nav > li > a:hover:before {
+   width: 50px;
  }
 
  #ma-main-nav .ma-dev-settings {
@@ -150,7 +169,7 @@
  }
 
  #ma-main-nav .ma-dev-settings a {
-   color: #525252;
+   color: #303031;
    -webkit-transition: all 0.3s ease-in-out;
    -moz-transition: all 0.3s ease-in-out;
    -o-transition: all 0.3s ease-in-out;
@@ -166,7 +185,7 @@
  #ma-main-nav .dropdown-menu {
    right: 20px;
    left: auto;
-   background-color: #525252;
+   background-color: #303031;
    border-radius: 0;
    border: none;
  }
@@ -278,13 +297,22 @@
 }
 
 .ma-alert {
-  padding: 10px 25px;
+  margin-bottom: 25px;
+  padding: 10px 15px;
+  background-color: #FFCCCC;
+  color: #990000;
+  font-size: 13px;
+  text-align: left;
+  border-radius: 0;
+}
+
+.ma-alert ul {
+  padding-left: 15px;
 }
 
 .ma-alert ul li {
   padding: 2px 5px;
   text-align: left;
-  list-style: square;
 }
 
 .nav-tabs.ma-nav-tabs {
@@ -353,9 +381,13 @@
  }
 
  .ma-hero-text-footer {
-   padding: 20px 25px;
-   background-color: #DDDDDD;
-   border-top: 1px solid #D0D0D0;
+   padding: 15px 25px;
+   background-color: #303031;
+   color: #FFFFFF;
+ }
+
+ .ma-hero-text-footer a {
+   color: #A3CDD7;
  }
 
  .ma-hero-text .ma-separator {
@@ -419,9 +451,13 @@
   }
 
   .ma-signin-form-footer {
-    padding: 20px 25px;
-    background-color: #DDDDDD;
-    border-top: 1px solid #D0D0D0;
+    padding: 15px 25px;
+    background-color: #303031;
+    color: #FFFFFF;
+  }
+
+  .ma-signin-form-footer a {
+    color: #A3CDD7;
   }
 
   #ma-signin form .form-group {
@@ -434,8 +470,8 @@
     padding: 7px 7px;
     position: absolute;
     left: -55px;
-    top: 24px;
-    background-color: #525252;
+    top: 29px;
+    background-color: #303031;
     color: #FFFFFF;
     font-size: 16px;
     text-align: center;
@@ -464,7 +500,7 @@
   .ma-dashboard-sidebar h2 {
     margin: 0;
     padding: 15px 10px;
-    background-color: #525252;
+    background-color: #303031;
     color: #FFFFFF;
     font-size: 13px;
     font-weight: 500;
@@ -502,7 +538,7 @@
 
   .ma-dashboard  .ma-dashboard-content {
     margin-left: 230px;
-    padding: 0 40px;
+    padding: 0 10px;
   }
 
   .ma-dashboard  .ma-dashboard-content .tab-content {
@@ -517,7 +553,7 @@
 
   .ma-dashboard .ma-container-config .ma-container-config-header {
     padding-bottom: 40px;
-    border-bottom: 4px double #525252;
+    border-bottom: 4px double #303031;
   }
 
   .ma-dashboard .ma-container-config .ma-container-config-content {
@@ -533,7 +569,7 @@
     top: 0px;
     border-left: 8px solid transparent;
     border-right: 8px solid transparent;
-    border-top: 8px solid #525252;
+    border-top: 8px solid #303031;
   }
 
   .ma-dashboard .ma-container-config .ma-container-config-content ul {
@@ -678,10 +714,24 @@
     text-align: center;
   }
 
+  #ma-footer span {
+    display: block;
+    text-align: center !important;
+  }
+
 }
 
 /* Extra Small Devices, Phones */
 @media (max-width : 480px) {
+
+  .ma-button {
+    min-width: 100%;
+    margin: 0;
+  }
+
+  .ma-hero-container {
+    min-height: 720px;
+  }
 
   .ma-dashboard  .ma-dashboard-sidebar {
     width: 80px;
