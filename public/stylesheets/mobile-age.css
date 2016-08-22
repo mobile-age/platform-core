@@ -626,8 +626,24 @@
 * 6.0 Error Pages
 * -----------------------------------------------------------------------------
 */
+ #ma-error {
 
+ }
 
+ #ma-error h1,
+ #ma-error i {
+   margin: 0;
+   font-size: 64px;
+   line-height: 72px;
+ }
+
+ .ma-error-container {
+   width: 240px;
+   margin: 0 auto;
+   padding: 15px 10px;
+   background-color: #F9F6F7;
+   box-shadow: 1px 4px 8px rgba(0,0,0,0.4);
+ }
 
 /*-----------------------------------------------------------------------------
 * 7.0 Media Queries
