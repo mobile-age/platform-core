@@ -32,4 +32,18 @@ router.post('/deploy', function(req, res, next) {
     });
 });
 
+
+router.get('/preconfList', function(req, res, next) {
+
+    dbHandler.dbactions.selectData(dbcon, 'docker_images', '*', [[1, 1, 0]], 1, function(result){
+        
+        console.log(result);
+        res.json(result);
+        
+    });
+    
+    
+    
+});
+
 module.exports = router;

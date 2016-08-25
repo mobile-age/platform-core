@@ -57,7 +57,7 @@ router.post('/authenticate', function(req, res, next) {
                 req.session.developer = result[0]['username'];
                 //console.log(result);
 
-                return res.redirect('/containers/config');
+                return res.redirect('/developers/dashboard');
             }
             else if(result == false){
 

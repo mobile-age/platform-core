@@ -48,12 +48,10 @@ block content
                                 .form-group.text-left 
                                   label Select preconfigured container (select one):
                                   select#sel1.form-control
-                                      option container 1
-                                      option container 2
-                                      option container 3
-                                      option container 4
+                                    option(disabled='', selected='', value='') -- Select among the available images --  
+                                    option(ng-repeat="option in devDashboardCtrl.images") {{ option.repo }} : {{ option.tag }}
                               .col-md-6
-                                button(type="submit" class="ma-button margin-top-20") Launch Container
+                                button(type="submit" class="ma-button margin-top-20") Deploy Container
                         .ma-container-config-content
                           .row
                             .col-md-12.padding-top-20.padding-bottom-20.text-left
@@ -62,7 +60,7 @@ block content
                                li 
                                 h4 Ubuntu
                                 img(src="/images/ubuntu.png" height="70")
-                                button(popover-animation="true" uib-popover="{{ devDashboardCtrl.info }}" type="button" class="ma-button ma-button-xs") More info
+                                button(popover-animation="true" uib-popover="{{ devDashboardCtrl.one() }}" type="button" class="ma-button ma-button-xs") More info
                             .col-md-12.padding-top-20.padding-bottom-20.text-left
                               h3 Development Tools
                               ul.margin-top-20.clearfix
