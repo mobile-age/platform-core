@@ -3,7 +3,7 @@ extends layout
 block content
   .ma-content-area
     #ma-home.ma-hero.ma-home-hero
-      .container.ma-hero-container
+      .container-fluid.ma-hero-container
         .row.ma-hero-content
           .ma-ds-table
             .ma-ds-table-cell
@@ -18,8 +18,8 @@ block content
                     .ma-button-group
                       a(href="/developers/signIn" class="ma-button") Sign in as Developer
                       .ma-separator OR
-                      a(href="" class="ma-button") Sign in as ODP
+                      a(href="/odp/signIn" class="ma-button") Sign in as ODP
                   .ma-hero-text-footer
                     p.no-margin Don't have an account? 
-                      a Register Now
+                      a(href="/signUp") Register Now
     

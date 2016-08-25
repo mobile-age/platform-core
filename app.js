@@ -10,7 +10,7 @@ var expValidator = require('express-validator');
 var session = require('express-session');
 
 // Include routes
-var routes = require('./routes/index');
+var routes = require('./routes/public');
 var developers = require('./routes/developers');
 var containers = require('./routes/containers');
 
@@ -33,12 +33,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(expValidator())
 
 app.use(session({
-    
+
     secret: "mobile_age_secret",
     resave: true,
     saveUninitialized: true,
     cookie: { maxAge: 6000000 }
-    
+
 }));
 
 app.use('/', routes);

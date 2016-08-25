@@ -1,0 +1,90 @@
+extends layout
+
+block content
+  .ma-content-area.ma-colored.ma-top-80.ma-bottom-80.ma-height-100(ng-controller="SignUpCtrl as signUpCtrl")
+    section.ma-section#ma-signup
+      .container.ma-signup-container
+        .row
+          .col-md-3.col-sm-2.col-xs-1
+            .ma-signup-sidebar
+              .ma-signup-sidebar-container
+                .ma-signup-option
+                  i(class="fa fa-user" ng-click="signUpCtrl.setForm(1)")
+                .ma-signup-option
+                  i(class="fa fa-database" ng-click="signUpCtrl.setForm(2)")
+          .col-md-6.col-sm-8.col-xs-10(ng-if="signUpCtrl.currentForm === 1")
+            .ma-signup-form-container
+              .ma-signup-form-content
+                h1.margin-bottom-30 Sign Up As Developer
+                form(action="" method="post" name="signup-form" role="form")
+                  if message
+                    .alert.alert-danger.ma-alert
+                      p.margin-bottom-5 Validation errors exist:
+                      ul
+                        for error in message
+                          li!= error.msg
+                  .form-group.text-left.ma-relative-pos
+                    label 
+                      i(class="fa fa-user ma-signup-icon") 
+                      | Username
+                    input(type="text" class="form-control" name="username")
+                  .form-group.text-left.ma-relative-pos
+                    label 
+                      i(class="fa fa-envelope ma-signup-icon") 
+                      | Email
+                    input(type="text" class="form-control" name="username")
+                  .form-group.text-left
+                    label 
+                      i(class="fa fa-lock ma-signup-icon")
+                      | Password  
+                    input(type="password" class="form-control" name="password")
+                  .form-group.text-left
+                    label Confirm Password
+                    input(type="password" class="form-control" name="passwordConfirm")
+                  .form-group
+                    input(type="submit" class="ma-button margin-top-20" value="Sign Up")
+              .ma-signup-form-footer
+                p.no-margin Do you have an account? 
+                  a Sign In
+          .col-md-6.col-sm-8.col-xs-10(ng-if="signUpCtrl.currentForm === 2")
+            .ma-signup-form-container
+              .ma-signup-form-content
+                h1.margin-bottom-30 Sign Up As ODP
+                form(action="" method="post" name="signup-form" role="form")
+                  if message
+                    .alert.alert-danger.ma-alert
+                      p.margin-bottom-5 Validation errors exist:
+                      ul
+                        for error in message
+                          li!= error.msg
+                  .form-group.text-left.ma-relative-pos
+                    label 
+                      i(class="fa fa-user ma-signup-icon") 
+                      | Username
+                    input(type="text" class="form-control" name="username")
+                  .form-group.text-left.ma-relative-pos
+                    label 
+                      i(class="fa fa-envelope ma-signup-icon") 
+                      | Email
+                    input(type="text" class="form-control" name="username")
+                  .form-group.text-left
+                    label 
+                      i(class="fa fa-lock ma-signup-icon")
+                      | Password  
+                    input(type="password" class="form-control" name="password")
+                  .form-group.text-left
+                    label Confirm Password
+                    input(type="password" class="form-control" name="passwordConfirm")
+                  .form-group.text-left
+                    label Organization
+                    input(type="text" class="form-control" name="organization")
+                  .form-group.text-left
+                    label Area of Interest
+                    input(type="text" class="form-control" name="areaOfInterest")
+                  .form-group
+                    input(type="submit" class="ma-button margin-top-20" value="Sign Up")
+              .ma-signup-form-footer
+                p.no-margin Do you have an account? 
+                  a Sign In
+                        
+                  
