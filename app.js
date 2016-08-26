@@ -12,6 +12,7 @@ var session = require('express-session');
 // Include routes
 var routes = require('./routes/public');
 var developers = require('./routes/developers');
+var odps = require('./routes/odps');
 var containers = require('./routes/containers');
 
 var app = express();
@@ -43,6 +44,7 @@ app.use(session({
 
 app.use('/', routes);
 app.use('/developers', developers);
+app.use('/odps', odps);
 app.use('/containers', containers);
 
 // catch 404 and forward to error handler

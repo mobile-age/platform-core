@@ -39,19 +39,19 @@ block content
                     li
                       a(data-toggle="tab" href="#4") Logs
                   .tab-content
-                    div(id="1" class="tab-pane fade in active")
+                    div(id="1" class="tab-pane fade in active" ng-if="!devDashboardCtrl.container")
                       .ma-container-config
                         .ma-container-config-header
                           .row.clearfix
-                            form(action="/containers/deploy?containerId=sampleId" method="post")
+                            form.form-horizontal
                               .col-md-6
-                                .form-group.text-left 
+                                .text-left 
                                   label Select preconfigured container (select one):
                                   select#sel1.form-control
                                     option(disabled='', selected='', value='') -- Select among the available images --  
                                     option(ng-repeat="option in devDashboardCtrl.images") {{ option.repo }} : {{ option.tag }}
                               .col-md-6
-                                button(type="submit" class="ma-button margin-top-20") Deploy Container
+                                button(type="submit" class="ma-button margin-top-20" ng-click="devDashboardCtrl.deployContainer()") Deploy Container
                         .ma-container-config-content
                           .row
                             .col-md-12.padding-top-20.padding-bottom-20.text-left
@@ -76,8 +76,76 @@ block content
                                   h4 PHP
                                   img(src="/images/php.png" height="70")
                                   button(popover-animation="true" uib-popover="{{ devDashboardCtrl.info }}" type="button" class="ma-button ma-button-xs") More info
+                    div(id="1" class="tab-pane fade in active" ng-if="devDashboardCtrl.container")
+                      .ma-container-overview
+                        .ma-container-overview-header.text-left
+                          h2 My Container
+                        .ma-container-config-content
+                          .row
+                            .col-md-10.col-sm-9.padding-top-20.padding-bottom-20.text-left
+                              .col-md-12.padding-top-20.padding-bottom-20.text-left
+                                h3 Info
+                                p text text text
+                              .col-md-12.padding-top-20.padding-bottom-20.text-left
+                                h3 Details
+                                p text text text
+                              .col-md-12.padding-top-20.padding-bottom-20.text-left
+                                h3 Activity  
+                                p text text text
+                            .col-md-2.col-sm-3.padding-top-20.padding-bottom-20
+                              a(class="ma-button ma-button-xs") 
+                                i(class="fa fa-play") 
+                                |  Start Container
+                              a(class="ma-button ma-button-xs") 
+                                i(class="fa fa-stop")
+                                |  Stop Container
                     div(id="2" class="tab-pane fade")
-                      h3 Source code
+                      .ma-sourcecode
+                        .ma-sourcecode-header
+                          .row
+                            .col-xs-12.text-left
+                              h2 Upload your source code
+                        .ma-sourcecode-content
+                          .row
+                            .col-xs-12
+                              .col-md-7.ma-sourcecode-left-column
+                                form.form-horizontal(role="form" name="form")
+                                  .form-group
+                                    .ma-file-upload.ma-button.ma-button-xs.no-margin.pull-left
+                                      i(class="glyphicon glyphicon-folder-open")
+                                      | Browse
+                                      input(type="file" nv-file-select="" uploader="devDashboardCtrl.filesUploader" multiple)
+                                  .form-group(devDashboardCtrl.filesUploader.isHTML5)
+                                    div(class="ma-drop-zone well my-drop-zone" nv-file-over="" uploader="devDashboardCtrl.filesUploader") Drag and drop your source code to be uploaded
+                                  .form-group(ng-if="devDashboardCtrl.filesUploader.queue.length")
+                                    h4 Upload Info
+                                    table.table.table-striped.table-hover
+                                      thead
+                                        tr
+                                          th Name
+                                          th(ng-show="devDashboardCtrl.filesUploader.isHTML5") Size
+                                          th Actions
+                                      tbody
+                                        tr(ng-repeat="item in devDashboardCtrl.filesUploader.queue")
+                                          td {{ item.file.name }}
+                                          td(ng-show="devDashboardCtrl.filesUploader.isHTML5" nowrap) {{ item.file.size/1024/1024|number:2 }} MB
+                                          td
+                                            button(type="button" class="ma-button ma-button-xs" title="Upload" ng-click="item.upload()" ng-disabled="item.isReady || item.isUploading || item.isSuccess")
+                                              span(class="glyphicon glyphicon-upload")
+                                            button(type="button" class="ma-button ma-button-xs" title="Cancel" ng-click="item.cancel()" ng-disabled="!item.isUploading")
+                                              span(class="glyphicon glyphicon-ban-circle")
+                                            button(type="button" class="ma-button ma-button-xs" title="Remove" ng-click="item.remove()")
+                                              span(class="glyphicon glyphicon-trash")
+                                  .form-group
+                                    button(type="submit" class="ma-button ma-button-xs margin-top-20 pull-right") 
+                                      i(class="fa fa-upload")
+                                      | Upload 
+                              .col-md-5.ma-sourcecode-right-column
+                                h4 
+                                  i(class="fa fa-folder-open")
+                                  |  Working Directory
+                                p Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?
+                                p Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
                     div(id="3" class="tab-pane fade")
                       h3 Activity
                     div(id="4" class="tab-pane fade")

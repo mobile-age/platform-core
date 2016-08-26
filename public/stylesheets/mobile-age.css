@@ -80,7 +80,49 @@
 }
 
 .ma-height-100 {
-  width: 100%;
+  height: 100%;
+}
+
+.ma-file-upload {
+  margin: 10px;
+  position: relative;
+  overflow: hidden;
+}
+
+.ma-file-upload input[type="file"] {
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 20px;
+  opacity: 0;
+  filter: alpha(opacity=0);
+  cursor: pointer;
+}
+
+table .ma-button {
+  padding: 4px 6px;
+  background-color: transparent;
+  color: #303031;
+  font-size: 16px;
+  text-align: center;
+  border: none;
+  border-radius: 50%;
+}
+
+table .ma-button:hover {
+  padding: 4px 6px;
+  background-color: #469AAF;
+  color: #FFFFFF;
+  border: none;
+}
+
+table .ma-button[disabled],
+table .ma-button[disabled]:hover {
+  background-color: transparent;
+  color: #303031;
+  opacity: 0.5;
 }
 
 
@@ -532,14 +574,22 @@
    }
 
    #ma-signup .ma-signup-option {
-     width: 40px;
-     height: 40px;
-     margin: 0px 4px 15px;
+     margin: 0px 4px 6px 0;
+     padding: 6px 6px;
+     position: relative;
      background-color: #F9F6F7;
-     font-size: 24px;
+     font-size: 29px;
      box-shadow: 1px 2px 4px rgba(0,0,0,0.4);
      cursor: pointer;
    }
+
+   #ma-signup .ma-signup-sidebar {
+     margin-top: -55px;
+     position: fixed;
+     left: 0;
+     top: 50%;
+   }
+
 
   /*-------------------------------------
    * 4.4 Dashboard
@@ -659,6 +709,31 @@
   .ma-dashboard .ma-container-config .ma-container-config-content ul li button {
     margin: 25px auto 0;
     display: block;
+  }
+
+  .ma-dashboard .ma-sourcecode-content .ma-drop-zone {
+    height: 240px;
+    background-color: #E6E6E6;
+    font-size: 12px;
+    text-align: left;
+  }
+
+  .ma-dashboard .ma-sourcecode-header {
+    padding-bottom: 40px;
+  }
+
+  .ma-dashboard .ma-sourcecode-content table {
+    font-size: 12px;
+  }
+
+  .ma-dashboard .ma-sourcecode-left-column,
+  .ma-dashboard .ma-sourcecode-right-column  {
+    text-align: left;
+  }
+
+  .ma-dashboard .ma-sourcecode-left-column {
+    padding: 0 30px;
+    border-right: 4px double #303031;
   }
 
 

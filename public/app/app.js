@@ -2,4 +2,5 @@
 
 var app = angular.module('maApp', [
   'ui.bootstrap',
+  'angularFileUpload'
 ]);

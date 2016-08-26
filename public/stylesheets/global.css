@@ -192,7 +192,7 @@ h6 {
 }
 
 p {
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 500;
 }
 
@@ -330,6 +330,10 @@ label {
   margin-bottom: 4px;
   display: inline-block;
   font-weight: 600;
+}
+
+i {
+  padding-right: 5px;
 }
 
 
