@@ -560,36 +560,49 @@ table .ma-button[disabled]:hover {
      position: relative;
    }
 
-   #ma-signup .ma-signup-icon {
-     width: 30px;
-     height: 30px;
-     padding: 7px 7px;
+   #ma-signup .ma-signup-infobox {
+     max-width: 480px;
+     margin: 0 auto;
+     margin-bottom: 40px;
+     padding: 15px 20px;
+     background-color: rgba(249,246,247,0.5);
+     text-align: left;
+   }
+
+   #ma-signup .ma-signup-infobox .ma-signup-button {
+     display: block;
+     text-transform: capitalize;
+   }
+
+   #ma-signup .ma-signup-infobox .ma-signup-button > span {
+     font-size: 12px;
+   }
+
+   #ma-signup .ma-signup-infobox .ma-signup-button .ma-button {
+     width: 48px;
+     min-width: auto !important;
+     height: 48px;
+     position: relative;
+     font-size: 28px;
+     text-align: center;
+     line-height: 28px;
+     border-radius: 50%;
+     border: none;
+   }
+
+   #ma-signup .ma-signup-infobox .ma-signup-button .ma-button:hover {
+     opacity: 0.8;
+   }
+
+   #ma-signup .ma-signup-infobox .ma-signup-button .ma-button span:nth-child(2) {
+     padding: 2px 3px;
      position: absolute;
-     left: -55px;
-     top: 29px;
+     right: 8px;
+     bottom: 9px;
      background-color: #303031;
      color: #FFFFFF;
-     font-size: 16px;
-     text-align: center;
+     font-size: 11px;
    }
-
-   #ma-signup .ma-signup-option {
-     margin: 0px 4px 6px 0;
-     padding: 6px 6px;
-     position: relative;
-     background-color: #F9F6F7;
-     font-size: 29px;
-     box-shadow: 1px 2px 4px rgba(0,0,0,0.4);
-     cursor: pointer;
-   }
-
-   #ma-signup .ma-signup-sidebar {
-     margin-top: -55px;
-     position: fixed;
-     left: 0;
-     top: 50%;
-   }
-
 
   /*-------------------------------------
    * 4.4 Dashboard

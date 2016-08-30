@@ -5,13 +5,26 @@ block content
     section.ma-section#ma-signup
       .container.ma-signup-container
         .row
-          .ma-signup-sidebar
-            .ma-signup-sidebar-container
-              .ma-signup-option(title="Sign up as developer")
-                i(class="fa fa-code" ng-click="signUpCtrl.setForm(1)")
-              .ma-signup-option(title="Sign up as ODP")
-                i(class="fa fa-database" ng-click="signUpCtrl.setForm(2)")
-          .col-md-6.col-md-offset-3.col-sm-8.col-sm-offset-2.col-xs-10.col-xs-offset-1(ng-if="signUpCtrl.currentForm === 1")
+          .col-md-4.col-sm-4.col-xs-12
+            .ma-signup-infobox
+              .ma-signup-infobox-container
+                p 
+                  strong Mobile Age Platform 
+                  | sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.
+                h4.margin-bottom-20 
+                  strong Create a new account!
+                .ma-signup-button
+                  a(class="ma-button ma-button-xs" title="Sign up as developer" ng-click="signUpCtrl.setForm(1);")
+                    span(class="fa fa-user")
+                    span(class="fa fa-code")
+                  span Sign up as developer
+                p.margin-left-20 OR
+                .ma-signup-button
+                  a(class="ma-button ma-button-xs" title="Sign up as ODP" ng-click="signUpCtrl.setForm(2);")
+                    span(class="fa fa-user")
+                    span(class="fa fa-database")
+                  span Sign up as ODP
+          .col-md-6.col-sm-8.col-xs-12(ng-if="signUpCtrl.currentForm === 1")
             .ma-signup-form-container
               .ma-signup-form-content
                 h1.margin-bottom-30 Sign Up As Developer
@@ -45,7 +58,7 @@ block content
               .ma-signup-form-footer
                 p.no-margin Do you have an account? 
                   a(href="/developers/signIn") Sign In
-          .col-md-6.col-md-offset-3.col-sm-8.col-sm-offset-2.col-xs-10.col-xs-offset-1(ng-if="signUpCtrl.currentForm === 2")
+          .col-md-6.col-sm-8.col-xs-10.col-xs-offset-1(ng-if="signUpCtrl.currentForm === 2")
             .ma-signup-form-container
               .ma-signup-form-content
                 h1.margin-bottom-30 Sign Up As ODP
