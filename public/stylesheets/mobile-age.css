@@ -642,6 +642,20 @@ table .ma-button[disabled]:hover {
     border-bottom: 1px solid #7FBDCC;
   }
 
+  .ma-dashboard-sidebar .nav-pills li.dropdown > a:after {
+    content: "\f105";
+    height: 30px;
+    margin-top: -15px;
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    color: #FFFFFF;
+    font-family: FontAwesome;
+    font-size: 16px;
+    font-weight: 300;
+    text-shadow: none;
+  }
+
   .ma-dashboard-sidebar .nav-pills li a {
     padding: 20px 10px;
     font-size: 30px;
@@ -649,11 +663,26 @@ table .ma-button[disabled]:hover {
     border-radius: 0;
   }
 
+  .ma-dashboard-sidebar .nav-pills li a:hover,
   .ma-dashboard-sidebar .nav-pills li.active a,
-  .ma-dashboard-sidebar .nav-pills li.active:hover a,
-  .ma-dashboard-sidebar .nav-pills li:hover a {
+  .ma-dashboard-sidebar .nav-pills li.active a:hover {
+    background-color: #4190A4;
+  }
+
+  .ma-dashboard-sidebar .nav-pills li.dropdown,
+  .ma-dashboard-sidebar .nav-pills li.dropdown.active a {
     background-color: #3A8092;
+  }
+
+  .ma-dashboard-sidebar .nav li.dropdown a:hover,
+  .ma-dashboard-sidebar .nav li.dropdown.open > a {
+    background-color: #337080;
+  }
+
+  .ma-dashboard-sidebar .nav-pills li h5 {
+    padding: 5px 0;
     color: #FFFFFF;
+    text-transform: capitalize;
   }
 
   .ma-dashboard-sidebar .nav-pills li a .title {
@@ -747,6 +776,23 @@ table .ma-button[disabled]:hover {
   .ma-dashboard .ma-sourcecode-left-column {
     padding: 0 30px;
     border-right: 4px double #303031;
+  }
+
+  .ma-dashboard-sidebar .dropdown-menu {
+    padding: 0;
+    top: 0;
+    left: 100%;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .ma-dashboard-sidebar .dropdown-menu li {
+    background-color: #3A8092;
+  }
+
+  .ma-dashboard-sidebar .dropdown-menu li a {
+    padding: 7px 10px;
+    font-size: 13px;
   }
 
 

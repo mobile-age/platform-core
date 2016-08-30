@@ -13,6 +13,17 @@ app.controller('DevDashboardCtrl', ['$scope', '$http', 'FileUploader',
         const ct = this;
 
         ct.container = false;
+        ct.applications = [{
+          name: 'Application 1'
+        }, {
+          name: 'Application 2'
+        }, {
+          name: 'Application 3'
+        }, {
+          name: 'Application 4'
+        }, {
+          name: 'Application 5'
+        }];
 
         ct.filesUploader = new FileUploader({
           queueLimit: 10,
@@ -29,6 +40,11 @@ app.controller('DevDashboardCtrl', ['$scope', '$http', 'FileUploader',
                 ct.images = [ {repo: 'error', tag:'error'}];
 
             });
+
+        ct.currentAppIdx = 0;
+        ct.setCurrentApp = function(idx) {
+          ct.currentAppIdx = idx;
+        };
 
         ct.info = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.";
 
