@@ -178,9 +178,16 @@ table .ma-button[disabled]:hover {
 
  #ma-main-nav .navbar-brand {
    height: auto;
-   padding: 20px 15px;
+   padding: 10px 15px;
    display: block;
    float: left;
+ }
+
+ #ma-main-nav .navbar-brand p {
+   height: 10px;
+   margin: 0;
+   padding-top: 4px;
+   text-transform: capitalize;
  }
 
  #ma-main-nav .navbar-nav > li > a {
@@ -408,14 +415,27 @@ table .ma-button[disabled]:hover {
    z-index: 1;
  }
 
- .ma-hero-image,
- .ma-hero-text {
-   margin: 0 15px;
+ .ma-home-hero .ma-hero-content .ma-ds-table-cell:nth-child(1) {
+   width: 60%;
+ }
+
+ .ma-home-hero .ma-hero-content .ma-ds-table-cell:nth-child(2) {
+   width: 40%;
  }
 
  .ma-hero-text {
+   max-width: 460px;
+   margin: 0 auto;
    background-color: #F9F6F7;
    box-shadow: 1px 4px 8px rgba(0,0,0,0.4);
+ }
+
+ .ma-hero-image {
+   text-align: left;
+ }
+
+ .ma-hero-image img {
+   max-width: 720px;
  }
 
  .ma-hero-text-content {
@@ -549,7 +569,7 @@ table .ma-button[disabled]:hover {
    }
 
    #ma-signup .ma-signup-form-container {
-     max-width: 480px;
+     max-width: 460px;
      margin: 0 auto;
      background-color: #F9F6F7;
      box-shadow: 1px 4px 8px rgba(0,0,0,0.4);
@@ -574,7 +594,7 @@ table .ma-button[disabled]:hover {
    }
 
    #ma-signup .ma-signup-infobox {
-     max-width: 480px;
+     max-width: 460px;
      margin: 0 auto;
      margin-bottom: 40px;
      padding: 25px 20px;
@@ -584,16 +604,28 @@ table .ma-button[disabled]:hover {
      border: solid 2px rgba(249,246,247,0.35);
    }
 
+   #ma-signup .ma-signup-infobox:before,
    #ma-signup .ma-signup-infobox:after {
      content: "";
      width: 0;
      height: 0;
      position: absolute;
-     bottom: -22px;
+     display: block;
+     border-style: solid;
+   }
+
+   #ma-signup .ma-signup-infobox:before {
      right: 30px;
-     border-left: 20px solid transparent;
-     border-right: 0 solid transparent;
-     border-top: 20px solid rgba(249,246,247,0.65);
+     bottom: -31px;
+     border-width: 15px;
+     border-color: #AECFD8 transparent transparent transparent;
+   }
+
+   #ma-signup .ma-signup-infobox:after {
+     right: 28px;
+     bottom: -30px;
+     border-width: 17px;
+     border-color: #85BAC8 transparent transparent transparent;
    }
 
    #ma-signup .ma-signup-infobox .ma-signup-button {
@@ -630,6 +662,40 @@ table .ma-button[disabled]:hover {
      background-color: #303031;
      color: #FFFFFF;
      font-size: 11px;
+   }
+
+   #ma-signup .ma-separator {
+     width: 30px;
+     height: 30px;
+     margin: 10px 10px 20px;
+     position: relative;
+     display: inline-block;
+     background-color: #D0D0D0;
+     color: #FFFFFF;
+     font-size: 12px;
+     font-weight: 600;
+     line-height: 30px;
+     border-radius: 50px;
+   }
+
+   #ma-signup .ma-separator::before {
+     content: "";
+     width: 10px;
+     height: 1px;
+     position: absolute;
+     top: 15px;
+     left: -50%;
+     background-color: #D0D0D0;
+   }
+
+   #ma-signup .ma-separator::after {
+     content: "";
+     width: 10px;
+     height: 1px;
+     position: absolute;
+     top: 15px;
+     right: -50%;
+     background-color: #D0D0D0;
    }
 
   /*-------------------------------------
@@ -942,6 +1008,11 @@ table .ma-button[disabled]:hover {
 
 /* Medium Devices, Desktops */
 @media (max-width : 991px) {
+
+  .ma-home-hero .ma-hero-content .ma-ds-table-cell:nth-child(1),
+  .ma-home-hero .ma-hero-content .ma-ds-table-cell:nth-child(2) {
+    width: 100%;
+  }
 
 }
 
