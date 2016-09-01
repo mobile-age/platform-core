@@ -15,6 +15,8 @@
         "serve-favicon": "~2.3.0",
         "express-validator": "0.6.0",
         "express-session": "^1.7.6",
+        "shelljs": "^0.7.4",
+        "request": "^2.74.0",
         "mysql": "~2.11.1",
         "bower": "^1.7.9"
   }

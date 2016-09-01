@@ -93,7 +93,7 @@ var dbactions = {
                     res.query("SELECT * FROM " + table + " WHERE " + argument + ";", function(err, rows){
                 
                         if (err){
-                            return exitCode(errCode + 'error_04');
+                            return exitCode(errCode + '_error_04');
                         }
                         else{
                             return exitCode(rows);          
@@ -114,7 +114,7 @@ var dbactions = {
                     res.query("SELECT " + selCols + " FROM " + table + " WHERE " + argument + ";", function(err, rows){
                 
                         if (err){
-                            return exitCode(errCode + 'error_05');
+                            return exitCode(errCode + '_error_05');
                         }
                         else{
                             return exitCode(rows);          

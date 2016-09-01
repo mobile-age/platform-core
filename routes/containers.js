@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
 var mysql = require('mysql');
+var shell = require('shelljs');
+var request = require('request');
 
 // Create connection
 var dbcon = require('../models/dbconnect');
@@ -21,15 +23,18 @@ router.get('/config', function(req, res, next) {
     });
 });
 
-router.post('/deploy', function(req, res, next) {
+router.get('/deploy/:image_id', function(req, res, next) {
 
-
-    console.log(req.query.code);
-
-
-    res.render('developers/configContainer', {
-
+    request('http://localhost:5000/developers/isAuth', function(error, response, body){
+        
+        console.log(body);
+        console.log(error);
+        res.json(response);
+        
     });
+    
+    //res.json(shell.exec("./scripts/execute_commands.sh 'deploy_container' 'developer_usename' 'ubuntu14.04_python3_node:latest'"));
+    
 });
 
 

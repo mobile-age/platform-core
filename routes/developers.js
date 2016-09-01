@@ -72,6 +72,28 @@ router.post('/authenticate', function(req, res, next) {
     }
 });
 
+
+router.get('/isAuth', function(req, res, next) {
+    
+    username = req.session.developer;
+    
+    dbHandler.dbactions.selectData(dbcon, 'developers', '*', [['username', username, 0]], 1, function(result){
+        
+        if(typeof result == 'object' && result.length > 0){
+            
+            res.json('True');
+            
+        }
+        else{
+            res.json('False');
+        }
+        
+    });
+    
+    
+});
+
+
 router.get('/dashboard', function(req, res, next) {
 
   res.render('developers/dashboard', {
