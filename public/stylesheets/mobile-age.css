@@ -787,7 +787,7 @@ table .ma-button[disabled]:hover {
   }
 
   .ma-dashboard  .ma-dashboard-content {
-    margin-left: 230px;
+    margin-left: 200px;
     padding: 0 10px;
   }
 
@@ -864,12 +864,18 @@ table .ma-button[disabled]:hover {
 
   .ma-dashboard .ma-sourcecode-left-column,
   .ma-dashboard .ma-sourcecode-right-column  {
+    padding: 0 30px;
     text-align: left;
+    vertical-align: top;
   }
 
   .ma-dashboard .ma-sourcecode-left-column {
-    padding: 0 30px;
+    width: 50%;
     border-right: 4px double #303031;
+  }
+
+  .ma-dashboard .ma-sourcecode-right-column {
+    width: 50%;
   }
 
   .ma-dashboard-sidebar .dropdown-menu {
@@ -1019,12 +1025,41 @@ table .ma-button[disabled]:hover {
 /* Small Devices, Tablets */
 @media (max-width : 767px) {
 
+  #ma-main-nav .navbar-nav {
+    padding: 0 15px;
+  }
+
+  #ma-main-nav .navbar-nav > li > a {
+    padding: 5px 15px;
+  }
+
+  #ma-main-nav .navbar-nav > li > a:hover {
+    color: #469AAF;
+  }
+
+  #ma-main-nav .navbar-nav > li > a::before {
+    content: none;
+  }
+
   .ma-dashboard  .ma-dashboard-sidebar {
     min-height: auto;
   }
 
   .ma-dashboard-sidebar h2 {
     text-align: center;
+  }
+
+  .ma-dashboard .ma-sourcecode-left-column,
+  .ma-dashboard .ma-sourcecode-right-column  {
+    width: 100%;
+    padding: 30px 0 0;
+    display: block;
+    border: none;
+  }
+
+  .ma-dashboard .ma-sourcecode-left-column  {
+    padding: 0 0 30px;
+    border-bottom: 4px double #303031;
   }
 
   #ma-footer span {
@@ -1036,6 +1071,22 @@ table .ma-button[disabled]:hover {
 
 /* Extra Small Devices, Phones */
 @media (max-width : 480px) {
+
+  #ma-main-nav .navbar-header {
+    padding-left: 5px;
+  }
+
+  #ma-main-nav .navbar-brand {
+    padding: 20px 0;
+  }
+
+  #ma-main-nav .navbar-toggle {
+    margin-right: 0;
+  }
+
+  #ma-main-nav .navbar-brand p {
+    display: none;
+  }
 
   .ma-button {
     min-width: 100%;
@@ -1052,6 +1103,19 @@ table .ma-button[disabled]:hover {
 
   .ma-dashboard  .ma-dashboard-content {
     margin-left: 80px;
+  }
+
+  .ma-dashboard-sidebar .nav-pills li a .title {
+    display: none;
+  }
+
+  .ma-dashboard-sidebar .nav-pills li.dropdown > a::after {
+    margin: auto;
+    margin-left: -3px;
+    top: auto;
+    bottom: 15px;
+    left: 50%;
+    right: auto;
   }
 
 }
