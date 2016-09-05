@@ -55,7 +55,7 @@ block content
                                 label Select preconfigured container (select one):
                                 select#sel1.form-control
                                   option(disabled='', selected='', value='') -- Select among the available images --  
-                                  option(ng-repeat="option in devDashboardCtrl.images", value='{{ option.image_id }}') {{ option.repo }} : {{ option.tag }}
+                                  option(ng-repeat="option in devDashboardCtrl.images", value='{{ option.repo }}:{{ option.tag }}') {{ option.repo }} : {{ option.tag }}
                             .col-md-6
                               button(type="submit" class="ma-button margin-top-20" ng-click="devDashboardCtrl.deployContainer()") Deploy Container
                       .ma-container-config-content

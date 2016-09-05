@@ -23,17 +23,26 @@ router.get('/config', function(req, res, next) {
     });
 });
 
-router.get('/deploy/:image_id', function(req, res, next) {
-
-    request('http://localhost:5000/developers/isAuth', function(error, response, body){
+router.get('/deploy/:image_tag', function(req, res, next) {
+    
+    //var user = req.session.developer;
+    var user = 'mobileage';
+    
+    request.post({
+        url: 'http://localhost:5000/developers/isAuth',
+        form: {key: user}
         
-        console.log(body);
-        console.log(error);
-        res.json(response);
+    }, function(error, response, body){
+        
+        if (body == "\"True\""){
+            
+            res.json(shell.exec("./scripts/execute_commands.sh 'deploy_container' " + user + " " + req.params.image_tag));
+        }
+        else{
+            res.json('authentication failed');
+        }
         
     });
-    
-    //res.json(shell.exec("./scripts/execute_commands.sh 'deploy_container' 'developer_usename' 'ubuntu14.04_python3_node:latest'"));
     
 });
 
@@ -42,13 +51,20 @@ router.get('/preconfList', function(req, res, next) {
 
     dbHandler.dbactions.selectData(dbcon, 'docker_images', '*', [[1, 1, 0]], 1, function(result){
         
-        console.log(result);
         res.json(result);
         
-    });
-    
-    
-    
+    });  
 });
+
+router.get('/preconfList/id/:im_id', function(req, res, next) {
+
+    dbHandler.dbactions.selectData(dbcon, 'docker_images', '*', [['image_id', req.params.im_id, 0]], 1, function(result){
+        
+        res.json(result);
+        
+    });  
+});
+
+
 
 module.exports = router;

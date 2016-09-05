@@ -73,9 +73,9 @@ router.post('/authenticate', function(req, res, next) {
 });
 
 
-router.get('/isAuth', function(req, res, next) {
+router.post('/isAuth', function(req, res, next) {
     
-    username = req.session.developer;
+    username = req.body.key;
     
     dbHandler.dbactions.selectData(dbcon, 'developers', '*', [['username', username, 0]], 1, function(result){
         
