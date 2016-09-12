@@ -10,6 +10,9 @@ var dbcon = require('../models/dbconnect');
 // Access database
 var dbHandler = require('../models/dbHandler');
 
+// General configuration
+
+var config = require('../general_config');
 
 
 router.get('/config', function(req, res, next) {
@@ -36,7 +39,16 @@ router.get('/deploy/:image_tag', function(req, res, next) {
         
         if (body == "\"True\""){
             
-            res.json(shell.exec("./scripts/execute_commands.sh 'deploy_container' " + user + " " + req.params.image_tag));
+            request.post({
+                
+                url: config.appsVM + '/containers/deploy/' + user + '/' + req.params.image_tag,
+                
+            }, function(error, response, body){
+                
+                res.json(body);
+                
+            });
+            
         }
         else{
             res.json('authentication failed');

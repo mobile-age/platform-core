@@ -40,3 +40,6 @@ db-credentials.js
 
 # sudoer credentials
 scripts/config.sh
+
+# general configuration
+general_config.js
