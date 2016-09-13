@@ -122,12 +122,81 @@ var dbactions = {
                     });
                     
                 }
-                
-                
-                //return exitCode(errCode + '_yes'+ argument);
             }
+        });
+    },
+    update_table: function(dbcon, table, columnNames, condition, oper, exitCode){
+    
+        var errCode = "02f";
+        
+        dbcon.dbconnection(function(res){
             
-            
+            if(res == 'error'){
+                
+                return exitCode(errCode + '_error_01');
+            }
+            else{
+                
+                var argument_1 = "";
+                
+                for(var i=0; i<(columnNames.length - 1); i++){
+                    
+                    argument_1 = argument_1 + columnNames[i][0] + "='" + columnNames[i][1] + "',";
+                    
+                }
+                argument_1 = argument_1 + columnNames[columnNames.length - 1][0] + "='" + columnNames[columnNames.length - 1][1] + "'";
+                
+                var argument_2 = "";
+                
+                for (i=0; i<condition.length; i++){
+                    
+                    switch(condition[i][2]){
+                            
+                        case 0:
+                            argument_2 = argument_2 + condition[i][0] + "='" + condition[i][1] + "'";
+                            break;
+                        case 1:
+                            argument_2 = argument_2 + condition[i][0] + ">'" + condition[i][1] + "'";
+                            break;
+                        case 2:
+                            argument_2 = argument_2 + condition[i][0] + "<'" + condition[i][1] + "'";
+                            break;
+                        case 3:
+                            argument_2 = argument_2 + condition[i][0] + ">='" + condition[i][1] + "'";
+                            break;
+                        case 4:
+                            argument_2 = argument_2 + condition[i][0] + "<='" + condition[i][1] + "'";
+                            break;
+                        default:
+                            return exitCode(errCode + '_error_02'); //Λάθος condition value
+                    }
+                    if(i<(condition.length - 1)){
+                        
+                        switch(oper){
+                                
+                            case 0:
+                                argument_2 = argument_2 + " && ";
+                                break;
+                            case 1:
+                                argument_2 = argument_2 + " || ";
+                                break;    
+                            default:
+                                return exitCode(errCode + '_error_03'); //Λάθος operand value
+                        }
+                    }
+                }
+                
+                res.query("UPDATE " + table + " SET " + argument_1 + " WHERE " + argument_2 + ";", function(err, rows){
+                
+                    if (err){
+                        return exitCode(errCode + '_error_04');
+                    }
+                    else{
+                        return exitCode(rows);          
+                    }
+                });
+                
+            }
         });
     }
 }

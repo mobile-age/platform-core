@@ -90,6 +90,22 @@ router.post('/isAuth', function(req, res, next) {
         
     });
     
+});
+
+router.get('/update', function(req, res, next) {
+    
+    dbHandler.dbactions.update_table(dbcon, 'developers', [['password','mobileage']], [['username', 'mobleage', 0]], 1, function(result){
+        
+        if(typeof result == 'object'){
+            
+            res.json(result);
+            
+        }
+        else{
+            res.json('False');
+        }
+        
+    });
     
 });
 
