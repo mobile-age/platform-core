@@ -109,6 +109,23 @@ router.get('/update', function(req, res, next) {
     
 });
 
+router.get('/create', function(req, res, next) {
+    
+    dbHandler.dbactions.create_rows(dbcon, 'developers', [['username', 'test'], ['password','test'], ['email','pp']], function(result){
+        
+        if(typeof result == 'object'){
+            
+            res.json(result);
+            
+        }
+        else{
+            res.json(result);
+        }
+        
+    });
+    
+});
+
 
 router.get('/dashboard', function(req, res, next) {
 

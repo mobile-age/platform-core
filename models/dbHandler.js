@@ -198,6 +198,43 @@ var dbactions = {
                 
             }
         });
+    },
+    create_rows: function(dbcon, table, info, exitCode){
+        
+        var errCode = "03f";
+        
+        dbcon.dbconnection(function(res){
+        
+            if(res == 'error'){
+                
+                return exitCode(errCode + '_error_01');
+            }
+            else{    
+                
+                var row_cols = "(";
+                var row_info = "(";
+                
+                for (var i=0; i< (info.length - 1); i++){
+                        
+                    row_cols = row_cols + info[i][0] + ",";
+                    row_info = row_info + "'" + info[i][1] + "',";
+                }
+                
+                row_cols = row_cols + info[info.length - 1][0] + ")";
+                row_info = row_info + "'" + info[info.length - 1][1] + "')";
+                
+                res.query("INSERT INTO " + table + " " + row_cols + " VALUES " + row_info + ";", function(err, rows){
+                
+                    if (err){
+                        return exitCode(errCode + '_error_04');
+                    }
+                    else{
+                        return exitCode(rows);          
+                    }
+                });
+            }
+            
+        });
     }
 }
 
