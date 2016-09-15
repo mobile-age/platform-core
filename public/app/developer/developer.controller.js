@@ -8,8 +8,8 @@ app.controller('DeveloperCtrl', ['$scope',
   }
 ]);
 
-app.controller('DevDashboardCtrl', ['$scope', '$http', 'FileUploader',
-    function ($scope, $http, FileUploader) {
+app.controller('DevDashboardCtrl', ['$scope', '$http', 'FileUploader', 'Notification',
+    function ($scope, $http, FileUploader, Notification) {
         const ct = this;
 
         ct.container = false;
@@ -41,7 +41,11 @@ app.controller('DevDashboardCtrl', ['$scope', '$http', 'FileUploader',
 
             });
 
-        ct.currentAppIdx = 0;
+        ct.addApplication = function () {
+          Notification.success('Application created.');
+        };
+
+        ct.currentAppIdx = -1;
         ct.setCurrentApp = function(idx) {
           ct.currentAppIdx = idx;
         };
@@ -49,7 +53,7 @@ app.controller('DevDashboardCtrl', ['$scope', '$http', 'FileUploader',
         ct.info = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.";
 
         ct.deployContainer = function() {
-        
+
             alert($("#sel1 option:selected").val());
             //ct.container = true;
         };

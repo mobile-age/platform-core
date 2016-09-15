@@ -715,7 +715,7 @@ table .ma-button[disabled]:hover {
     position: absolute;
     left: 0;
     top: 0;
-    background-color: #469AAF;
+    background-color: #303031;
   }
 
   .ma-dashboard-sidebar h2 {
@@ -732,8 +732,12 @@ table .ma-button[disabled]:hover {
   .ma-dashboard-sidebar .nav-pills li {
     margin: 0;
     padding: 0;
-    background-color: #469AAF;
-    border-bottom: 1px solid #7FBDCC;
+    background-color: #98989A;
+    border-bottom: 1px solid #8B8B8D;
+  }
+
+  .ma-dashboard-sidebar .nav-pills .dropdown-menu li {
+    border-bottom: 1px solid #4190A4;
   }
 
   .ma-dashboard-sidebar .nav-pills li.dropdown > a:after {
@@ -760,7 +764,7 @@ table .ma-button[disabled]:hover {
   .ma-dashboard-sidebar .nav-pills li a:hover,
   .ma-dashboard-sidebar .nav-pills li.active a,
   .ma-dashboard-sidebar .nav-pills li.active a:hover {
-    background-color: #4190A4;
+    background-color: #7E7E81;
   }
 
   .ma-dashboard-sidebar .nav-pills li.dropdown,
@@ -774,7 +778,9 @@ table .ma-button[disabled]:hover {
   }
 
   .ma-dashboard-sidebar .nav-pills li h5 {
+    margin-top: 40px;
     padding: 5px 0;
+    background-color: #656567;
     color: #FFFFFF;
     text-transform: capitalize;
   }

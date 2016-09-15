@@ -6,6 +6,7 @@
     "bootstrap": "^3.3.6",
     "font-awesome": "^4.6.3",
     "angular-bootstrap": "^2.0.0",
-    "angular-file-upload": "^2.3.4"
+    "angular-file-upload": "^2.3.4",
+    "angular-ui-notification": "^0.2.0"
   }
 }

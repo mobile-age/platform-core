@@ -15,6 +15,10 @@ block content
                   i(class="fa fa-file-code-o" aria-hidden="true")
                   span.title My Applications
                 ul.dropdown-menu
+                  li
+                    a(data-toggle="tab" href="#tab1" ng-click="devDashboardCtrl.setCurrentApp(-1);") 
+                      i(class="fa fa-plus")
+                      | Add New Application
                   li(ng-repeat="app in devDashboardCtrl.applications")
                     a(data-toggle="tab" href="#tab1" ng-click="devDashboardCtrl.setCurrentApp($index);") {{ app.name }}
               li
@@ -33,7 +37,18 @@ block content
                   span.title Open Data
           .ma-dashboard-content
             .tab-content
-              div(id="tab1" class="tab-pane fade in active")
+              div(id="tab1" class="tab-pane fade in active" ng-if="devDashboardCtrl.currentAppIdx === -1")
+                h2.margin-bottom-20.text-left Add New Application
+                .tab-content
+                  .row.clearfix
+                    form.form-horizontal
+                      .col-md-6
+                        .text-left 
+                          label Application Name
+                        input.form-control(type="text" ng-model="devDashboardCtrl.appName")
+                      .col-md-6
+                        button(type="submit" class="ma-button margin-top-20" ng-click="devDashboardCtrl.addApplication()") Add Application
+              div(id="tab1" class="tab-pane fade in active" ng-if="devDashboardCtrl.currentAppIdx !== -1")
                 h2.margin-bottom-20.text-left {{ devDashboardCtrl.applications[devDashboardCtrl.currentAppIdx].name }}
                 ul(class="nav nav-tabs ma-nav-tabs")
                   li.active
@@ -49,10 +64,7 @@ block content
                     .ma-container-config
                       .ma-container-config-header
                         .row.clearfix
-                          form.form-horizontal
-                            .col-md-6
-                              .text-left 
-                                label Select preconfigured container (select one):
+                          form.form-l Select preconfigured container (select one):
                                 select#sel1.form-control
                                   option(disabled='', selected='', value='') -- Select among the available images --  
                                   option(ng-repeat="option in devDashboardCtrl.images", value='{{ option.repo }}:{{ option.tag }}') {{ option.repo }} : {{ option.tag }}
