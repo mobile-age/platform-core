@@ -715,29 +715,39 @@ table .ma-button[disabled]:hover {
     position: absolute;
     left: 0;
     top: 0;
-    background-color: #303031;
+    background-color: #272727;
   }
 
   .ma-dashboard-sidebar h2 {
     margin: 0;
     padding: 15px 10px;
-    background-color: #303031;
+    background-color: #1A1A1A;
     color: #FFFFFF;
     font-size: 13px;
     font-weight: 500;
-    text-align: left;
+    text-align: center;
     text-transform: uppercase;
+    border-bottom: 2px solid #262627;
   }
 
   .ma-dashboard-sidebar .nav-pills li {
     margin: 0;
     padding: 0;
-    background-color: #98989A;
-    border-bottom: 1px solid #8B8B8D;
+  }
+
+  .ma-dashboard-sidebar .nav-pills li.ma-sidebar-section-title {
+    border-bottom: 1px solid #1A1A1A;
+  }
+
+  .ma-dashboard-sidebar .nav-pills li.ma-sidebar-section-title a:hover,
+  .ma-dashboard-sidebar .nav-pills li.ma-sidebar-section-title a:focus,
+  .ma-dashboard-sidebar .nav-pills li.ma-sidebar-section-title.open > a {
+    background-color: #272727;
   }
 
   .ma-dashboard-sidebar .nav-pills .dropdown-menu li {
-    border-bottom: 1px solid #4190A4;
+    background-color: #469AAF;
+    border-bottom: 1px solid #7FBDCC;
   }
 
   .ma-dashboard-sidebar .nav-pills li.dropdown > a:after {
@@ -755,41 +765,52 @@ table .ma-button[disabled]:hover {
   }
 
   .ma-dashboard-sidebar .nav-pills li a {
-    padding: 20px 10px;
+    padding: 15px 10px;
     font-size: 30px;
     color: #FFFFFF;
     border-radius: 0;
   }
 
   .ma-dashboard-sidebar .nav-pills li a:hover,
+  .ma-dashboard-sidebar .nav-pills li a:focus,
   .ma-dashboard-sidebar .nav-pills li.active a,
   .ma-dashboard-sidebar .nav-pills li.active a:hover {
-    background-color: #7E7E81;
+    background-color: #469AAF;
   }
 
-  .ma-dashboard-sidebar .nav-pills li.dropdown,
-  .ma-dashboard-sidebar .nav-pills li.dropdown.active a {
-    background-color: #3A8092;
-  }
-
-  .ma-dashboard-sidebar .nav li.dropdown a:hover,
-  .ma-dashboard-sidebar .nav li.dropdown.open > a {
-    background-color: #337080;
+  .ma-dashboard-sidebar .nav-pills li.dropdown.active > a,
+  .ma-dashboard-sidebar .nav-pills li.dropdown a:hover {
+    background-color: #272727;
   }
 
   .ma-dashboard-sidebar .nav-pills li h5 {
-    margin-top: 40px;
-    padding: 5px 0;
-    background-color: #656567;
+    margin: 0;
     color: #FFFFFF;
+    text-align: left;
     text-transform: capitalize;
   }
 
   .ma-dashboard-sidebar .nav-pills li a .title {
-    margin-top: 5px;
+    margin: 5px;
     display: block;
-    font-size: 13px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
     text-align: center;
+  }
+
+  .ma-dashboard-sidebar .nav-pills li a i {
+    color: #469AAF;
+  }
+
+  .ma-dashboard-sidebar .nav-pills li a:hover i,
+  .ma-dashboard-sidebar .nav-pills li.active a i {
+    color: #FFFFFF;
+  }
+
+  .ma-dashboard-sidebar .nav-pills li.dropdown a .title {
+    margin: 0;
+    text-align: left;
   }
 
   .ma-dashboard  .ma-dashboard-content {

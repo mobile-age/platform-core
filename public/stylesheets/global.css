@@ -455,6 +455,10 @@ button {
   margin-bottom: 40px !important;
 }
 
+.margin-bottom-60 {
+  margin-bottom: 60px !important;
+}
+
 .margin-left-5 {
   margin-left: 5px !important;
 }
@@ -533,6 +537,10 @@ button {
 
 .padding-bottom-40 {
   padding-bottom: 40px !important;
+}
+
+.padding-bottom-60 {
+  padding-bottom: 60px !important;
 }
 
 .padding-right-10 {

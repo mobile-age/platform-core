@@ -6,23 +6,22 @@ block content
       .fluid-container.ma-height-100
         .row.ma-height-100
           .ma-dashboard-sidebar
-            h2 
-              i(class="fa fa-cog")
-              |  Dashboard
+            h2 Dashboard
             ul(class="nav nav-pills nav-stacked")
-              li.dropdown
-                a(class="dropdown-toggle padding-bottom-40" data-toggle="dropdown")
-                  i(class="fa fa-file-code-o" aria-hidden="true")
-                  span.title My Applications
-                ul.dropdown-menu
-                  li
-                    a(data-toggle="tab" href="#tab1" ng-click="devDashboardCtrl.setCurrentApp(-1);") 
-                      i(class="fa fa-plus")
-                      | Add New Application
+              li.dropdown.ma-sidebar-section-title
+                a(class="dropdown-toggle" data-toggle="dropdown")
+                  h5 My Applications
+                ul.dropdown-menu(ng-if="devDashboardCtrl.applications.length > 0")
                   li(ng-repeat="app in devDashboardCtrl.applications")
                     a(data-toggle="tab" href="#tab1" ng-click="devDashboardCtrl.setCurrentApp($index);") {{ app.name }}
               li
-                h5.no-margin Platform key features
+                a(data-toggle="tab" href="#tab1" ng-click="devDashboardCtrl.setCurrentApp(-1);")
+                  i(class="fa fa-plus" aria-hidden="true")
+                  span.title New Application
+              li.padding-bottom-60
+              li.ma-sidebar-section-title
+                a
+                  h5 Platform key features
               li
                 a(data-toggle="tab" href="#tab2")
                   i(class="fa fa-cogs" aria-hidden="true")

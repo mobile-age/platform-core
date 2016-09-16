@@ -13,17 +13,7 @@ app.controller('DevDashboardCtrl', ['$scope', '$http', 'FileUploader', 'Notifica
         const ct = this;
 
         ct.container = false;
-        ct.applications = [{
-          name: 'Application 1'
-        }, {
-          name: 'Application 2'
-        }, {
-          name: 'Application 3'
-        }, {
-          name: 'Application 4'
-        }, {
-          name: 'Application 5'
-        }];
+        ct.applications = [];
 
         ct.filesUploader = new FileUploader({
           queueLimit: 10,
@@ -42,6 +32,7 @@ app.controller('DevDashboardCtrl', ['$scope', '$http', 'FileUploader', 'Notifica
             });
 
         ct.addApplication = function () {
+          ct.applications.push({name: ct.appName});
           Notification.success('Application created.');
         };
 
