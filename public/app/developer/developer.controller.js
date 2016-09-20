@@ -13,7 +13,6 @@ app.controller('DevDashboardCtrl', ['$scope', '$http', 'FileUploader', 'Notifica
         const ct = this;
 
         ct.container = false;
-        ct.applications = [];
 
         ct.filesUploader = new FileUploader({
           queueLimit: 10,
@@ -31,9 +30,45 @@ app.controller('DevDashboardCtrl', ['$scope', '$http', 'FileUploader', 'Notifica
 
             });
         
-        ct.addApplication = function () {
-          ct.applications.push({name: ct.appName});
-          Notification.success('Application created.');
+        $http.get('/applications/my_apps')
+            .success(function(data){
+
+                ct.applications = data;
+
+            })
+            .error(function(data){
+
+                ct.applications = [ {name: 'error'} ];
+
+            });
+        
+        
+        ct.addApplication = function () { 
+            
+            $http.get('/applications/add/' + ct.appName)
+                .success(function(data){
+                    
+                    Notification.success('Application ' + ct.appName + ' created successfully.');
+                
+                    $http.get('/applications/my_apps')
+                        .success(function(data){
+
+                            ct.applications = data;
+
+                        })
+                        .error(function(data){
+
+                            ct.applications = [ {name: 'error'} ];
+
+                        });
+
+                })
+                .error(function(data){
+
+                    Notification.success('Error in creating ' + ct.appName + ' application.');
+
+                });
+
         };
 
         ct.currentAppIdx = -1;

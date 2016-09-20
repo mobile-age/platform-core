@@ -40,13 +40,16 @@ block content
                 h2.margin-bottom-20.text-left Add New Application
                 .tab-content
                   .row.clearfix
-                    form.form-horizontal
+                    form.form-horizontal(name="add_app")
                       .col-md-6
                         .text-left 
                           label Application Name
-                        input.form-control(type="text" ng-model="devDashboardCtrl.appName")
+                        input.form-control(type="text" name="app_name" placeholder="my_application_name" ng-model="devDashboardCtrl.appName" ng-required="true")
                       .col-md-6
                         button(type="submit" class="ma-button margin-top-20" ng-click="devDashboardCtrl.addApplication()") Add Application
+                  .row.clearfix
+                    .alert.alert-danger.ma-alert(ng-show="add_app.app_name.$error.required && add_app.$dirty")
+                      p The application name cannot be empty!
               div(id="tab1" class="tab-pane fade in active" ng-if="devDashboardCtrl.currentAppIdx !== -1")
                 h2.margin-bottom-20.text-left {{ devDashboardCtrl.applications[devDashboardCtrl.currentAppIdx].name }}
                 ul(class="nav nav-tabs ma-nav-tabs")
