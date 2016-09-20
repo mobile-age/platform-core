@@ -30,7 +30,7 @@ app.controller('DevDashboardCtrl', ['$scope', '$http', 'FileUploader', 'Notifica
                 ct.images = [ {repo: 'error', tag:'error'}];
 
             });
-
+        
         ct.addApplication = function () {
           ct.applications.push({name: ct.appName});
           Notification.success('Application created.');

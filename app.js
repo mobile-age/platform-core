@@ -14,6 +14,7 @@ var routes = require('./routes/public');
 var developers = require('./routes/developers');
 var odps = require('./routes/odps');
 var containers = require('./routes/containers');
+var applications = require('./routes/applications');
 
 var app = express();
 
@@ -31,7 +32,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(expValidator())
+app.use(expValidator());
 
 app.use(session({
 
@@ -46,6 +47,7 @@ app.use('/', routes);
 app.use('/developers', developers);
 app.use('/odps', odps);
 app.use('/containers', containers);
+app.use('/applications', applications);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
