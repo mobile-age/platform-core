@@ -66,7 +66,7 @@ app.controller('DevDashboardCtrl', ['$scope', '$http', 'FileUploader', 'Notifica
                 })
                 .error(function(data){
 
-                    Notification.success('Error in creating ' + ct.appName + ' application.');
+                    Notification.error('Error in creating ' + ct.appName + ' application.');
 
                 });
 
@@ -92,7 +92,7 @@ app.controller('DevDashboardCtrl', ['$scope', '$http', 'FileUploader', 'Notifica
             
             for (var i=0; i<ct.applications.length; i++){
                 
-                if (ct.applications[i]["id"] == id){
+                if (ct.applications[i]["id"] == idx){
                     
                     if (ct.applications[i]["container_id"] == "not_assigned"){
                         
@@ -111,8 +111,17 @@ app.controller('DevDashboardCtrl', ['$scope', '$http', 'FileUploader', 'Notifica
 
         ct.deployContainer = function() {
 
-            alert($("#sel1 option:selected").val());
-            //ct.container = true;
+            $http.get('/containers/deploy/' + ct.currentAppIdx + '/' + $("#sel1 option:selected").val())
+                .success(function(data){
+
+                    alert(data);
+
+                })
+                .error(function(data){
+
+                    alert(data);
+
+                });
         };
 
         ct.one = function() {
