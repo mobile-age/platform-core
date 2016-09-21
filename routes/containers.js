@@ -109,6 +109,26 @@ router.get('/preconfList/id/:im_id', function(req, res, next) {
 });
 
 
+router.get('/:container_id/details', function(req, res, next) {
+
+    var info = {};
+    
+    dbHandler.dbactions.selectData(dbcon, 'containers', '*', [['container_id', req.params.container_id, 0]], 1, function(result){
+        
+        info["id"] = result[0]["container_id"];
+        if (result[0]["active"] > 0){
+            info["active"] = "running";
+        }
+        else{
+            info["active"] = "stopped";
+        }
+        info["image"] = result[0]["image_id"];
+        
+        res.json(info);
+
+    });
+});
+
 /*
 router.get('/test', function(req, res, next) {
 

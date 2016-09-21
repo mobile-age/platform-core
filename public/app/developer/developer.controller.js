@@ -101,6 +101,18 @@ app.controller('DevDashboardCtrl', ['$scope', '$http', 'FileUploader', 'Notifica
                     else{
                         
                         ct.container = true;
+                        
+                        $http.get('/containers/' + ct.applications[i]["container_id"] + '/details')
+                            .success(function(data){
+
+                                ct.container_info = data;
+
+                            })
+                            .error(function(data){
+
+                                ct.container_info = [ ];
+
+                            });
                     }  
                 }
             }

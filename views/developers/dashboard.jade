@@ -105,13 +105,18 @@ block content
                           .col-md-10.col-sm-9.padding-top-20.padding-bottom-20.text-left
                             .col-md-12.padding-top-20.padding-bottom-20.text-left
                               h3 Info
-                              p text text text
+                              p 
+                                span Container ID: 
+                                {{ devDashboardCtrl.container_info.id }}
+                              p 
+                                span Image: 
+                                {{ devDashboardCtrl.container_info.image }}
                             .col-md-12.padding-top-20.padding-bottom-20.text-left
                               h3 Details
                               p text text text
                             .col-md-12.padding-top-20.padding-bottom-20.text-left
                               h3 Activity  
-                              p text text text
+                              p Status: {{ devDashboardCtrl.container_info.active }}
                           .col-md-2.col-sm-3.padding-top-20.padding-bottom-20
                             a(class="ma-button ma-button-xs") 
                               i(class="fa fa-play") 
