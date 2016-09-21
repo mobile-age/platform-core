@@ -13,7 +13,7 @@ block content
                   h5 My Applications
                 ul.dropdown-menu(ng-if="devDashboardCtrl.applications.length > 0")
                   li(ng-repeat="app in devDashboardCtrl.applications")
-                    a(data-toggle="tab" href="#tab1" ng-click="devDashboardCtrl.setCurrentApp($index);") {{ app.name }}
+                    a(data-toggle="tab" href="#tab1" ng-click="devDashboardCtrl.setCurrentApp(app.id);") {{ app.name }}
               li
                 a(data-toggle="tab" href="#tab1" ng-click="devDashboardCtrl.setCurrentApp(-1);")
                   i(class="fa fa-plus" aria-hidden="true")
@@ -51,7 +51,7 @@ block content
                     .alert.alert-danger.ma-alert(ng-show="add_app.app_name.$error.required && add_app.$dirty")
                       p The application name cannot be empty!
               div(id="tab1" class="tab-pane fade in active" ng-if="devDashboardCtrl.currentAppIdx !== -1")
-                h2.margin-bottom-20.text-left {{ devDashboardCtrl.applications[devDashboardCtrl.currentAppIdx].name }}
+                h2.margin-bottom-20.text-left {{ devDashboardCtrl.getAppNameById(devDashboardCtrl.currentAppIdx) }}
                 ul(class="nav nav-tabs ma-nav-tabs")
                   li.active
                     a(data-toggle="tab" href="#1") My Container

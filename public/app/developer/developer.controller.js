@@ -13,6 +13,7 @@ app.controller('DevDashboardCtrl', ['$scope', '$http', 'FileUploader', 'Notifica
         const ct = this;
 
         ct.container = false;
+        ct.currentAppIdx = -1;
 
         ct.filesUploader = new FileUploader({
           queueLimit: 10,
@@ -70,10 +71,40 @@ app.controller('DevDashboardCtrl', ['$scope', '$http', 'FileUploader', 'Notifica
                 });
 
         };
-
-        ct.currentAppIdx = -1;
+        
+        ct.getAppNameById = function (id) {
+            
+            for (var i=0; i<ct.applications.length; i++){
+                
+                if (ct.applications[i]["id"] == id){
+                    
+                    return ct.applications[i]["name"];
+                }
+            }
+            
+            return "error";
+            
+        };
+        
         ct.setCurrentApp = function(idx) {
-          ct.currentAppIdx = idx;
+            
+            ct.currentAppIdx = idx;
+            
+            for (var i=0; i<ct.applications.length; i++){
+                
+                if (ct.applications[i]["id"] == id){
+                    
+                    if (ct.applications[i]["container_id"] == "not_assigned"){
+                        
+                        ct.container = false;
+                    }
+                    else{
+                        
+                        ct.container = true;
+                    }  
+                }
+            }
+            
         };
 
         ct.info = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.";
