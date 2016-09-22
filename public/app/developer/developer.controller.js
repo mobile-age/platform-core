@@ -135,6 +135,38 @@ app.controller('DevDashboardCtrl', ['$scope', '$http', 'FileUploader', 'Notifica
 
                 });
         };
+        
+        ct.startContainer = function() {
+            
+            $http.get('/containers/start/' + ct.container_info["id"] )
+                .success(function(data){
+                    
+                    ct.container_info["active"] = "running";
+                    Notification.success('Container started successfully.');
+
+                })
+                .error(function(data){
+                    
+                    Notification.error('Container start failure.');
+
+                });
+        };
+        
+        ct.stopContainer = function() {
+            
+            $http.get('/containers/stop/' + ct.container_info["id"] )
+                .success(function(data){
+                    
+                    ct.container_info["active"] = "stopped";
+                    Notification.success('Container stopped successfully.');
+
+                })
+                .error(function(data){
+                    
+                    Notification.error('Container stop failure.');
+
+                });
+        };
 
         ct.one = function() {
 

@@ -118,10 +118,10 @@ block content
                               h3 Activity  
                               p Status: {{ devDashboardCtrl.container_info.active }}
                           .col-md-2.col-sm-3.padding-top-20.padding-bottom-20
-                            a(class="ma-button ma-button-xs") 
+                            a(class="ma-button ma-button-xs" ng-click="devDashboardCtrl.startContainer()") 
                               i(class="fa fa-play") 
                               |  Start Container
-                            a(class="ma-button ma-button-xs") 
+                            a(class="ma-button ma-button-xs" ng-click="devDashboardCtrl.stopContainer()") 
                               i(class="fa fa-stop")
                               |  Stop Container
                   div(id="2" class="tab-pane fade" nv-file-drop="" uploader="devDashboardCtrl.filesUploader")
