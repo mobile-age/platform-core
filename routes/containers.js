@@ -63,30 +63,23 @@ router.get('/deploy/:app_id/:image_tag', function(req, res, next) {
                                 else{
                                     res.json('failure');
                                 }
-
                             });
-
                         }
                         else{
                             res.json('failure');
                         }
-
                     });
                     
                 }
                 else{
                     res.json(body);
-                }
-                
+                } 
             });
-
         }
         else{
             res.json('authentication failed');
         }
-
     });
-
 });
 
 
@@ -127,6 +120,100 @@ router.get('/:container_id/details', function(req, res, next) {
         res.json(info);
 
     });
+});
+
+router.get('/start/:container_id', function(req, res, next) {
+
+    //var user = req.session.developer;
+    var user = 'mobileage';
+
+    request.post({
+        url: 'http://localhost:5000/developers/isAuth',
+        form: {key: user}
+
+    }, function(error, response, body){
+
+        if (body == "\"True\""){
+
+            request.post({
+
+                url: config.appsVM + '/containers/start/' + req.params.container_id ,
+
+            }, function(error, response, body){
+                
+                var output = JSON.parse(body);
+                
+                if (output["status"] == "Success"){
+                    
+                    dbHandler.dbactions.update_table(dbcon, 'containers', [['active', 1]], [['container_id', req.params.container_id, 0]], 1, function(result){
+        
+                        if(typeof result == 'object'){
+                            
+                            res.json('success');
+
+                        }
+                        else{
+                            res.json('failure');
+                        }
+
+                    }); 
+                }
+                else{
+                    res.json(body);
+                }
+            });
+        }
+        else{
+            res.json('authentication failed');
+        }
+    });    
+});
+
+router.get('/stop/:container_id', function(req, res, next) {
+
+    //var user = req.session.developer;
+    var user = 'mobileage';
+
+    request.post({
+        url: 'http://localhost:5000/developers/isAuth',
+        form: {key: user}
+
+    }, function(error, response, body){
+
+        if (body == "\"True\""){
+
+            request.post({
+
+                url: config.appsVM + '/containers/stop/' + req.params.container_id ,
+
+            }, function(error, response, body){
+                
+                var output = JSON.parse(body);
+                
+                if (output["status"] == "Success"){
+                    
+                    dbHandler.dbactions.update_table(dbcon, 'containers', [['active', 0]], [['container_id', req.params.container_id, 0]], 1, function(result){
+        
+                        if(typeof result == 'object'){
+                            
+                            res.json('success');
+
+                        }
+                        else{
+                            res.json('failure');
+                        }
+
+                    }); 
+                }
+                else{
+                    res.json(body);
+                }
+            });
+        }
+        else{
+            res.json('authentication failed');
+        }
+    });    
 });
 
 /*
