@@ -125,9 +125,31 @@ app.controller('DevDashboardCtrl', ['$scope', '$http', 'FileUploader', 'Notifica
 
             $http.get('/containers/deploy/' + ct.currentAppIdx + '/' + $("#sel1 option:selected").val())
                 .success(function(data){
+                    
+                    Notification.success('Container created successfully.');
+                    ct.container = true;
+                
+                    for (var i=0; i<ct.applications.length; i++){
+                        
+                        if (ct.applications[i]["id"] == ct.currentAppIdx){
+                            
+                            ct.applications[i]["container_id"] = data;
+                            alert(data);
+                            $http.get('/containers/' + data + '/details')
+                                .success(function(data){
 
-                    alert(data);
+                                    ct.container_info = data;
 
+                                })
+                                .error(function(data){
+
+                                    ct.container_info = [ ];
+
+                                });
+                            break;
+                        }
+                    }
+                    
                 })
                 .error(function(data){
 

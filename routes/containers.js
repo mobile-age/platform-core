@@ -57,7 +57,7 @@ router.get('/deploy/:app_id/:image_tag', function(req, res, next) {
         
                                 if(typeof result == 'object'){
 
-                                    res.json('success');
+                                    res.json(output["containerId"]);
 
                                 }
                                 else{
