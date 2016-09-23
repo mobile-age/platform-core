@@ -134,7 +134,7 @@ app.controller('DevDashboardCtrl', ['$scope', '$http', 'FileUploader', 'Notifica
                         if (ct.applications[i]["id"] == ct.currentAppIdx){
                             
                             ct.applications[i]["container_id"] = data;
-                            alert(data);
+
                             $http.get('/containers/' + data + '/details')
                                 .success(function(data){
 
