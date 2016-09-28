@@ -90,6 +90,18 @@ app.controller('DevDashboardCtrl', ['$scope', '$http', 'FileUploader', 'Notifica
             
             ct.currentAppIdx = idx;
             
+            $http.get('/applications/info/' + ct.currentAppIdx)
+                .success(function(data){
+
+                    ct.application_info = data;
+
+                })
+                .error(function(data){
+
+                    ct.application_info = [ ];
+
+                });
+
             for (var i=0; i<ct.applications.length; i++){
                 
                 if (ct.applications[i]["id"] == idx){
@@ -116,7 +128,6 @@ app.controller('DevDashboardCtrl', ['$scope', '$http', 'FileUploader', 'Notifica
                     }  
                 }
             }
-            
         };
 
         ct.info = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.";

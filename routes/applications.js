@@ -43,8 +43,6 @@ router.get('/add/:name', function(req, res, next) {
     
 });
 
-
-
 router.get('/my_apps', function(req, res, next) {
 
     //var user = req.session.developer;
@@ -52,8 +50,9 @@ router.get('/my_apps', function(req, res, next) {
 
     request.post({
         url: 'http://localhost:5000/developers/isAuth',
-        form: {key: user}
-
+        form: {
+            key: user
+        }
     }, function(error, response, body){
 
         if (body == "\"True\""){
@@ -73,6 +72,59 @@ router.get('/my_apps', function(req, res, next) {
     
 });
 
+router.get('/info/:app_id', function(req, res, next) {
 
+    //var user = req.session.developer;
+    var user = 'mobileage';
+
+    request.post({
+        url: 'http://localhost:5000/developers/isAuth',
+        form: {
+            key: user
+        }
+    }, function(error, response, body){
+
+        if (body == "\"True\""){
+
+            dbHandler.dbactions.selectData(dbcon, 'applications', '*', [['id', req.params.app_id, 0]], 1, function(result){
+
+                if(result.length == 1){
+                    
+                    dbHandler.dbactions.selectData(dbcon, 'app_repos', '*', [['container_id', result[0]['container_id'], 0]], 1, function(out){
+                        
+                        if(out.length == 1){
+                            console.log(config.appsVM + '/repos/project/info/' + out[0]['project_id']);
+                            request.post({
+                                url: config.appsVM + '/repos/project/info',
+                                form:{
+                                    project_id: out[0]['project_id']
+                                }
+                            },function(error, response, body){
+                                
+                                var info = JSON.parse(body);
+                                res.json(info);
+
+                            });
+                        }
+                        else{
+                    
+                            res.json({message:'Repository not found'});
+                        }
+                    });
+                }
+                else{
+                    
+                    res.json({message:'Application not found'});
+                }
+            });
+
+        }
+        else{
+            res.json({message:'authentication failed'});
+        }
+
+    });
+    
+});
 
 module.exports = router;

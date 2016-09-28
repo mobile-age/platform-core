@@ -15,6 +15,7 @@ var developers = require('./routes/developers');
 var odps = require('./routes/odps');
 var containers = require('./routes/containers');
 var applications = require('./routes/applications');
+var repositories = require('./routes/repositories');
 
 var app = express();
 
@@ -48,6 +49,7 @@ app.use('/developers', developers);
 app.use('/odps', odps);
 app.use('/containers', containers);
 app.use('/applications', applications);
+app.use('/repositories', repositories);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
