@@ -93,7 +93,7 @@ router.get('/info/:app_id', function(req, res, next) {
                     dbHandler.dbactions.selectData(dbcon, 'app_repos', '*', [['container_id', result[0]['container_id'], 0]], 1, function(out){
                         
                         if(out.length == 1){
-                            console.log(config.appsVM + '/repos/project/info/' + out[0]['project_id']);
+
                             request.post({
                                 url: config.appsVM + '/repos/project/info',
                                 form:{
