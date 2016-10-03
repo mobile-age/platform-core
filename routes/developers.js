@@ -79,13 +79,18 @@ router.post('/isAuth', function(req, res, next) {
     
     dbHandler.dbactions.selectData(dbcon, 'developers', '*', [['username', username, 0]], 1, function(result){
         
-        if(typeof result == 'object' && result.length > 0){
-            
-            res.json('True');
-            
+        if(result['queryStatus'] == 'Success'){
+
+            if(result['data'].length > 0){
+                res.json({routerStatus:'Success', isAuth: true});    
+            }
+            else{
+                res.json({routerStatus:'Success', isAuth: false}); 
+            }
+        
         }
         else{
-            res.json('False');
+            res.json({routerStatus:'Failure'});
         }
         
     });

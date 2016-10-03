@@ -26,7 +26,8 @@ router.get('/add/:name', function(req, res, next) {
 
     }, function(error, response, body){
 
-        if (body == "\"True\""){
+        var info = JSON.parse(body);
+        if (info['routerStatus'] == 'Success' && info['isAuth']){
 
             dbHandler.dbactions.create_rows(dbcon, 'applications', [['name', req.params.name], ['developer', user], ['container_id','not_assigned']], function(result){
         
@@ -36,7 +37,7 @@ router.get('/add/:name', function(req, res, next) {
 
         }
         else{
-            res.json('authentication failed');
+            res.json({routerStatus:'Failure', routerMessage:'authentication failed'});
         }
 
     });
@@ -54,9 +55,10 @@ router.get('/my_apps', function(req, res, next) {
             key: user
         }
     }, function(error, response, body){
-
-        if (body == "\"True\""){
-
+        
+        var info = JSON.parse(body);
+        if (info['routerStatus'] == 'Success' && info['isAuth']){
+            
             dbHandler.dbactions.selectData(dbcon, 'applications', '*', [['developer', user, 0]], 1, function(result){
 
                 res.json(result);
@@ -65,11 +67,9 @@ router.get('/my_apps', function(req, res, next) {
 
         }
         else{
-            res.json('authentication failed');
+            res.json({routerStatus:'Failure', routerMessage:'authentication failed'});
         }
-
     });
-    
 });
 
 router.get('/info/:app_id', function(req, res, next) {
@@ -84,20 +84,21 @@ router.get('/info/:app_id', function(req, res, next) {
         }
     }, function(error, response, body){
 
-        if (body == "\"True\""){
+        var info = JSON.parse(body);
+        if (info['routerStatus'] == 'Success' && info['isAuth']){
 
             dbHandler.dbactions.selectData(dbcon, 'applications', '*', [['id', req.params.app_id, 0]], 1, function(result){
 
-                if(result.length == 1){
+                if(result['queryStatus'] == 'Success' && result['data'].length == 1){
                     
-                    dbHandler.dbactions.selectData(dbcon, 'app_repos', '*', [['container_id', result[0]['container_id'], 0]], 1, function(out){
+                    dbHandler.dbactions.selectData(dbcon, 'app_repos', '*', [['container_id', result['data'][0]['container_id'], 0]], 1, function(out){
                         
-                        if(out.length == 1){
+                        if(out['queryStatus'] == 'Success' && out['data'].length == 1){
 
                             request.post({
                                 url: config.appsVM + '/repos/project/info',
                                 form:{
-                                    project_id: out[0]['project_id']
+                                    project_id: out['data'][0]['project_id']
                                 }
                             },function(error, response, body){
                                 
@@ -108,19 +109,19 @@ router.get('/info/:app_id', function(req, res, next) {
                         }
                         else{
                     
-                            res.json({message:'Repository not found'});
+                            res.json({routerStatus:'Failure', message:'Repository not found'});
                         }
                     });
                 }
                 else{
                     
-                    res.json({message:'Application not found'});
+                    res.json({routerStatus:'Failure', message:'Application not found'});
                 }
             });
 
         }
         else{
-            res.json({message:'authentication failed'});
+            res.json({routerStatus:'Failure', routerMessage:'authentication failed'});
         }
 
     });
