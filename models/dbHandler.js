@@ -44,7 +44,7 @@ var dbactions = {
             
             if(res == 'error'){
                 
-                return exitCode(errCode + '_error_01');
+                return exitCode({queryStatus:"Failure", errorMessage: errCode + '_error_01'});
             }
             else{
                 
@@ -70,7 +70,7 @@ var dbactions = {
                             argument = argument + condition[i][0] + "<='" + condition[i][1] + "'";
                             break;
                         default:
-                            return exitCode(errCode + '_error_02'); //Λάθος condition value       
+                            return exitCode({queryStatus:"Failure", errorMessage: errCode + '_error_02'}); //Λάθος condition value       
                     }
                     if (i < ((condition.length) - 1)){
 
@@ -83,7 +83,7 @@ var dbactions = {
                                 argument = argument + ' || ';
                                 break;
                             default:
-                                return exitCode(errCode + '_error_03'); //Λάθος operand value     
+                                return exitCode({queryStatus:"Failure", errorMessage: errCode + '_error_03'}); //Λάθος operand value     
                         }
                         
                     }   
@@ -93,10 +93,10 @@ var dbactions = {
                     res.query("SELECT * FROM " + table + " WHERE " + argument + ";", function(err, rows){
                 
                         if (err){
-                            return exitCode(errCode + '_error_04');
+                            return exitCode({queryStatus:"Failure", errorMessage: errCode + '_error_04'});
                         }
                         else{
-                            return exitCode(rows);          
+                            return exitCode({queryStatus:"Success", data:rows});          
                         }
                     });
                     
@@ -114,10 +114,10 @@ var dbactions = {
                     res.query("SELECT " + selCols + " FROM " + table + " WHERE " + argument + ";", function(err, rows){
                 
                         if (err){
-                            return exitCode(errCode + '_error_05');
+                            return exitCode({queryStatus:"Failure", errorMessage: errCode + '_error_05'});
                         }
                         else{
-                            return exitCode(rows);          
+                            return exitCode({queryStatus:"Success", data:rows});          
                         }
                     });
                     
@@ -133,7 +133,7 @@ var dbactions = {
             
             if(res == 'error'){
                 
-                return exitCode(errCode + '_error_01');
+                return exitCode({queryStatus:"Failure", errorMessage: errCode + '_error_01'});
             }
             else{
                 
@@ -168,7 +168,7 @@ var dbactions = {
                             argument_2 = argument_2 + condition[i][0] + "<='" + condition[i][1] + "'";
                             break;
                         default:
-                            return exitCode(errCode + '_error_02'); //Λάθος condition value
+                            return exitCode({queryStatus:"Failure", errorMessage: errCode + '_error_02'}); //Λάθος condition value
                     }
                     if(i<(condition.length - 1)){
                         
@@ -181,7 +181,7 @@ var dbactions = {
                                 argument_2 = argument_2 + " || ";
                                 break;    
                             default:
-                                return exitCode(errCode + '_error_03'); //Λάθος operand value
+                                return exitCode({queryStatus:"Failure", errorMessage: errCode + '_error_03'}); //Λάθος operand value
                         }
                     }
                 }
@@ -189,10 +189,10 @@ var dbactions = {
                 res.query("UPDATE " + table + " SET " + argument_1 + " WHERE " + argument_2 + ";", function(err, rows){
                 
                     if (err){
-                        return exitCode(errCode + '_error_04');
+                        return exitCode({queryStatus:"Failure", errorMessage: errCode + '_error_04'});
                     }
                     else{
-                        return exitCode(rows);          
+                        return exitCode({queryStatus:"Success", data:rows});          
                     }
                 });
                 
@@ -207,7 +207,7 @@ var dbactions = {
         
             if(res == 'error'){
                 
-                return exitCode(errCode + '_error_01');
+                return exitCode({queryStatus:"Failure", errorMessage: errCode + '_error_01'});
             }
             else{    
                 
@@ -226,10 +226,10 @@ var dbactions = {
                 res.query("INSERT INTO " + table + " " + row_cols + " VALUES " + row_info + ";", function(err, rows){
                 
                     if (err){
-                        return exitCode(errCode + '_error_04');
+                        return exitCode({queryStatus:"Failure", errorMessage: errCode + '_error_04'});
                     }
                     else{
-                        return exitCode(rows);          
+                        return exitCode({queryStatus:"Success", data:rows});          
                     }
                 });
             }
