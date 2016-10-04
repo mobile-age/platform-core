@@ -33,8 +33,8 @@ app.controller('DevDashboardCtrl', ['$scope', '$http', 'FileUploader', 'Notifica
         
         $http.get('/applications/my_apps')
             .success(function(data){
-
-                ct.applications = data;
+                
+                ct.applications = data['info']['data'];
 
             })
             .error(function(data){
@@ -43,25 +43,30 @@ app.controller('DevDashboardCtrl', ['$scope', '$http', 'FileUploader', 'Notifica
 
             });
         
-        
         ct.addApplication = function () { 
             
             $http.get('/applications/add/' + ct.appName)
                 .success(function(data){
-                    
-                    Notification.success('Application ' + ct.appName + ' created successfully.');
                 
-                    $http.get('/applications/my_apps')
-                        .success(function(data){
+                    if (data['routerStatus'] == 'Success' && data['info']['queryStatus'] == 'Success'){
+                        Notification.success('Application ' + ct.appName + ' created successfully.');
+                
+                        $http.get('/applications/my_apps')
+                            .success(function(data){
 
-                            ct.applications = data;
+                                ct.applications = data['info']['data'];
 
-                        })
-                        .error(function(data){
+                            })
+                            .error(function(data){
 
-                            ct.applications = [ {name: 'error'} ];
+                                ct.applications = [ {name: 'error'} ];
 
-                        });
+                            });
+                    }
+                    else{
+                        Notification.error('Error in creating ' + ct.appName + ' application.');
+                    }
+                    
 
                 })
                 .error(function(data){
@@ -93,7 +98,7 @@ app.controller('DevDashboardCtrl', ['$scope', '$http', 'FileUploader', 'Notifica
             $http.get('/applications/info/' + ct.currentAppIdx)
                 .success(function(data){
 
-                    ct.application_info = data;
+                    ct.application_info = data['info']['info'];
 
                 })
                 .error(function(data){
