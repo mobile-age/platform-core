@@ -45,7 +45,7 @@ router.get('/deploy/:app_id/:image_tag', function(req, res, next) {
                     url: config.appsVM + '/containers/deploy/' + user + '_' + req.params.app_id + '/' + req.params.image_tag,
 
                 }, function(error, response, body){
-
+                    
                     if(error){
                         
                         send["routerStatus"] = "Failure";
@@ -56,45 +56,59 @@ router.get('/deploy/:app_id/:image_tag', function(req, res, next) {
                     else{
 
                         var output = JSON.parse(body);
+                        
                         if (output["routerStatus"] == "Success"){
-
-                            dbHandler.dbactions.create_rows(dbcon, 'containers', [['container_id', output["containerId"]], ['image_id', req.params.image_tag], ['developer_id', user], ['active', 1]], function(result){
-
+                            
+                            dbHandler.dbactions.selectData(dbcon, 'applications', '*', [['id', req.params.app_id, 0]], 1, function(result){
+                                                
                                 if(result['queryStatus'] == 'Success'){
 
-                                    dbHandler.dbactions.update_table(dbcon, 'applications', [['container_id', output["containerId"]]], [['id', req.params.app_id, 0]], 1, function(result){
+                                    var app_name = result['data'][0]['name'];
 
-                                        if(result['queryStatus'] == 'Success'){
+                                    request.get({
 
-                                            //res.json(output["containerId"]);
+                                    url: 'http://localhost:5000/repositories/create/' + app_name
 
-                                            dbHandler.dbactions.selectData(dbcon, 'applications', '*', [['id', req.params.app_id, 0]], 1, function(result){
+                                    }, function(error, response, body){
+                                        
+                                        if (error){
+                                            send["routerStatus"] = "Failure";
+                                            send["routerMessage"] = "Error communicating with apps VM";
 
-                                                var app_name = result[0]['name'];
+                                            res.json(send);
+                                        }
+                                        else{
+                                            
+                                            var repo_info = JSON.parse(body);
+                                            
+                                            if (repo_info['routerStatus'] == "Success"){
+                                                
+                                                dbHandler.dbactions.create_rows(dbcon, 'containers', [['container_id', output["containerId"]], ['image_id', req.params.image_tag], ['developer_id', user], ['active', 1]], function(result){
 
-                                                request.get({
+                                                    if(result['queryStatus'] == 'Success'){
 
-                                                url: 'http://localhost:5000/repositories/create/' + app_name
+                                                        dbHandler.dbactions.update_table(dbcon, 'applications', [['container_id', output["containerId"]]], [['id', req.params.app_id, 0]], 1, function(result){
 
-                                                }, function(error, response, body){
-                                                    
-                                                    if (error){
-                                                        send["routerStatus"] = "Failure";
-                                                        send["routerMessage"] = "Error communicating with apps VM";
-
-                                                        res.json(send);
-                                                    }
-                                                    else{
-                                                        var repo = JSON.parse(body);
-
-                                                        dbHandler.dbactions.create_rows(dbcon, 'app_repos', [['container_id', output["containerId"]], ['project_id', repo['id']], ['developer', user]], function(result){
-                                                            
                                                             if(result['queryStatus'] == 'Success'){
-                                                                
-                                                                send["routerStatus"] = "Success";
-                                                                send["routerMessage"] = "Container deployed successfully along with the associated repository";
 
-                                                                res.json(send);
+                                                                dbHandler.dbactions.create_rows(dbcon, 'app_repos', [['container_id', output["containerId"]], ['project_id', repo_info['info']['info']['id']], ['developer', user]], function(result){
+
+                                                                    if(result['queryStatus'] == 'Success'){
+
+                                                                        send["routerStatus"] = "Success";
+                                                                        send["routerMessage"] = "Container deployed successfully along with the associated repository";
+                                                                        send["info"]={};
+                                                                        send["info"]["container_id"] = output["containerId"];
+
+                                                                        res.json(send);
+                                                                    }
+                                                                    else{
+                                                                        send["routerStatus"] = "Failure";
+                                                                        send["routerMessage"] = "DB query error";
+
+                                                                        res.json(send);
+                                                                    }
+                                                                });
                                                             }
                                                             else{
                                                                 send["routerStatus"] = "Failure";
@@ -104,24 +118,31 @@ router.get('/deploy/:app_id/:image_tag', function(req, res, next) {
                                                             }
                                                         });
                                                     }
+                                                    else{
+
+                                                        send["routerStatus"] = "Failure";
+                                                        send["routerMessage"] = "DB query error";
+
+                                                        res.json(send);
+                                                    }
                                                 });
-                                            });
-                                        }
-                                        else{
-                                            send["routerStatus"] = "Failure";
-                                            send["routerMessage"] = "DB query error";
-                                            
-                                            res.json(send);
+                                            }
+                                            else{
+                                                send["routerStatus"] = "Failure";
+                                                send["routerMessage"] = "Apps VM router failed";
+
+                                                res.json(send);
+                                            }
                                         }
                                     });
                                 }
                                 else{
-                                    
                                     send["routerStatus"] = "Failure";
                                     send["routerMessage"] = "DB query error";
-                                    
+
                                     res.json(send);
-                                }
+
+                                }  
                             });
                         }
                         else{
@@ -129,8 +150,7 @@ router.get('/deploy/:app_id/:image_tag', function(req, res, next) {
                             send["routerStatus"] = "Failure";
                             send["routerMessage"] = "Apps VM route failed";
 
-                            res.json(send);
-                            
+                            res.json(send);    
                         }
                     } 
                 });
@@ -194,20 +214,26 @@ router.get('/:container_id/details', function(req, res, next) {
     dbHandler.dbactions.selectData(dbcon, 'containers', '*', [['container_id', req.params.container_id, 0]], 1, function(result){
         
         if (result['queryStatus'] == 'Success'){
-            send["routerStatus"] = "Success";
             
-            info = {};
-            info["id"] = result['data'][0]["container_id"];
-            if (result['data'][0]["active"] > 0){
-                info["active"] = "running";
+            if (result['data'].length > 0){
+                send["routerStatus"] = "Success";
+            
+                info = {};
+                info["id"] = result['data'][0]["container_id"];
+                if (result['data'][0]["active"] > 0){
+                    info["active"] = "running";
+                }
+                else{
+                    info["active"] = "stopped";
+                }
+                info["image"] = result['data'][0]["image_id"];
+
+                send["data"] = info;
             }
             else{
-                info["active"] = "stopped";
+                send["routerStatus"] = "Failure";
+                send["routerMessage"] = "Container not found";
             }
-            info["image"] = result['data'][0]["image_id"];
-            
-            send["data"] = info;
-            
         }
         else{
             send["routerStatus"] = "Failure";
