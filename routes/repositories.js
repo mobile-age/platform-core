@@ -19,7 +19,9 @@ router.get('/create/:repo_name', function(req, res, next) {
     
     //var user = req.session.developer;
     var user = 'mobileage';
-
+    
+    var send = {};
+    
     request.post({
         url: 'http://localhost:5000/developers/isAuth',
         form: {
@@ -27,53 +29,95 @@ router.get('/create/:repo_name', function(req, res, next) {
         }
     }, function(error, response, body){
         
-        if (body == "\"True\""){
+        if(error){
+            send["routerStatus"] = "Failure";
+            send["routerMessage"] = "Internal Error";
+            
+            res.json(send);
+        }
+        else{
 
-            request.post({
+            var info = JSON.parse(body);
+            
+            if (info['routerStatus'] == 'Success' && info['isAuth']){
+            
+                request.post({
                 url: config.appsVM + '/repos/users/username',
                 form:{
                     username: user
                 }
                 
-            },function(error, response, body){
-                
-                if (error){
-                    
-                    res.json({message:'Error'});
-                }
-                else{
-                    var info = JSON.parse(body);
-                    if (info.length == 1){
-                        
-                        request.post({
-                            url: config.appsVM + '/repos/project/create',
-                            form:{
-                                name: req.params.repo_name,
-                                user_id: info[0]['id']
-                            }
-                        },function(error, response, body){
+                },function(error, response, body){
 
-                            if (error){
-                    
-                                res.json({message:'Error'});
-                            }
-                            else{
-                                
-                                try{
-                                    out = JSON.parse(body);
-                                    res.json(out[id]);
-                                }
-                                catch (e){
-                                    res.json(body);
-                                }
-                            }
-                        });
+                    if (error){
+
+                        send["routerStatus"] = "Failure";
+                        send["routerMessage"] = "Error communicating with apps VM";
+
+                        res.json(send);
                     }
                     else{
-                        res.json({message:'User not found in local repository'});
+                        
+                        var info = JSON.parse(body);
+                         
+                        if (info["routerStatus"] == "Success"){
+                            
+                            if (info['info'].length > 0){
+                                
+                                request.post({
+                                    url: config.appsVM + '/repos/project/create',
+                                    form:{
+                                        name: req.params.repo_name,
+                                        user_id: info["info"][0]['id']
+                                    }
+                                },function(error, response, body){
+
+                                    if (error){
+
+                                        send["routerStatus"] = "Failure";
+                                        send["routerMessage"] = "Error communicating with apps VM";
+
+                                        res.json(send);
+                                    }
+                                    else{
+
+                                        var out = JSON.parse(body);
+
+                                        if (out["routerStatus"] == "Success"){
+
+                                            send["routerStatus"] = "Success";
+                                            send["routerMessage"] = "Repository created successfully";
+                                            send["info"] = out;
+                                            
+                                            res.json(send);
+                                        }
+                                        else{
+                                            send["routerStatus"] = "Failure";
+                                            send["routerMessage"] = "Apps VM route failed";
+                                            send["info"] = out;
+
+                                            res.json(send);
+                                        }
+                                    }
+                                });
+                            }
+                            else{
+                                send["routerStatus"] = "Failure";
+                                send["routerMessage"] = "User not found an apps VM";
+
+                                res.json(send);
+                            }
+                        }
+                        else{
+                            
+                            send["routerStatus"] = "Failure";
+                            send["routerMessage"] = "Apps VM route failed";
+
+                            res.json(send);
+                        }
                     }
-                }
-            });       
+                });        
+            }       
         }
     });
 });

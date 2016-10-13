@@ -22,7 +22,7 @@ app.controller('DevDashboardCtrl', ['$scope', '$http', 'FileUploader', 'Notifica
         $http.get('/containers/preconfList')
             .success(function(data){
 
-                ct.images = data;
+                ct.images = data['info']['data'];
 
             })
             .error(function(data){
@@ -122,7 +122,7 @@ app.controller('DevDashboardCtrl', ['$scope', '$http', 'FileUploader', 'Notifica
                         $http.get('/containers/' + ct.applications[i]["container_id"] + '/details')
                             .success(function(data){
 
-                                ct.container_info = data;
+                                ct.container_info = data['data'];
 
                             })
                             .error(function(data){
@@ -154,7 +154,7 @@ app.controller('DevDashboardCtrl', ['$scope', '$http', 'FileUploader', 'Notifica
                             $http.get('/containers/' + data + '/details')
                                 .success(function(data){
 
-                                    ct.container_info = data;
+                                    ct.container_info = data['data'];
 
                                 })
                                 .error(function(data){
@@ -169,7 +169,7 @@ app.controller('DevDashboardCtrl', ['$scope', '$http', 'FileUploader', 'Notifica
                 })
                 .error(function(data){
 
-                    alert(data);
+                    Notification.error('Container creation failed.');
 
                 });
         };
@@ -210,14 +210,6 @@ app.controller('DevDashboardCtrl', ['$scope', '$http', 'FileUploader', 'Notifica
 
             return 'ttt';
         };
-
-        /*
-        ct.containers = [
-
-            {name: 'cont1', value: '10'},
-            {name: 'cont2', value: '20'}
-
-        ]*/
 
   }
 ]);

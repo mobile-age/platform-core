@@ -77,24 +77,29 @@ router.post('/isAuth', function(req, res, next) {
     
     username = req.body.key;
     
+    var send = {};
+    
     dbHandler.dbactions.selectData(dbcon, 'developers', '*', [['username', username, 0]], 1, function(result){
         
         if(result['queryStatus'] == 'Success'){
 
             if(result['data'].length > 0){
-                res.json({routerStatus:'Success', isAuth: true});    
+                send["routerStatus"] = "Success";
+                send["isAuth"] = "true";
             }
             else{
-                res.json({routerStatus:'Success', isAuth: false}); 
+                send["routerStatus"] = "Success";
+                send["isAuth"] = "false"; 
             }
         
         }
         else{
-            res.json({routerStatus:'Failure'});
+            send["routerStatus"] = "Failure";
+            send["routerMessage"] = "BD Query error";
         }
-        
+
+        res.json(send);
     });
-    
 });
 
 router.get('/update', function(req, res, next) {

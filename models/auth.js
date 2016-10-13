@@ -9,18 +9,18 @@ var auth = {
             if(result['queryStatus'] == 'Success'){
 
                 if(result['data'].length > 0){
-                    send["routerStatus"] = "Success";
+                    send["queryStatus"] = "Success";
                     send["isAuth"] = "true";
                 }
                 else{
-                    send["routerStatus"] = "Success";
+                    send["queryStatus"] = "Success";
                     send["isAuth"] = "false"; 
                 }
 
             }
             else{
-                send["routerStatus"] = "Failure";
-                send["routerMessage"] = "BD Query error";
+                send["queryStatus"] = "Failure";
+                send["queryMessage"] = "BD Query error";
             }
             
             return exitCode(send);

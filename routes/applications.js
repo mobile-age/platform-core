@@ -117,6 +117,58 @@ router.get('/my_apps', function(req, res, next) {
     });
 });
 
+router.get('/name/:app_id', function(req, res, next) {
+
+    //var user = req.session.developer;
+    var user = 'mobileage';
+    
+    var send = {};
+    
+    request.post({
+        url: 'http://localhost:5000/developers/isAuth',
+        form: {
+            key: user
+        }
+    }, function(error, response, body){
+        
+        
+        if(error){
+            send["routerStatus"] = "Failure";
+            send["routerMessage"] = "Internal Error";
+            
+            res.json(send);
+        }
+        else{
+            dbHandler.dbactions.selectData(dbcon, 'applications', '*', [['id', req.params.app_id, 0]], 1, function(result){
+                
+                if (error){
+                    send["routerStatus"] = "Failure";
+                    send["routerMessage"] = "Internal Error";
+
+                    res.json(send);
+                }
+                else{
+                    if(result['queryStatus'] == 'Success'){
+                        if (result["data"].length > 0){
+                            send["routerStatus"] = "Success";
+                            send["info"] = result["data"][0]["name"];
+                        }
+                        else{
+                            send["routerStatus"] = "Failure";
+                            send["routerMessage"] = "Application does not exist";
+                        }
+                    }
+                    else{
+                        send["routerStatus"] = "Failure";
+                        send["routerMessage"] = "BD Query error";
+                    }
+                    res.json(send);
+                } 
+            });
+        }
+    });
+});
+
 router.get('/info/:app_id', function(req, res, next) {
 
     //var user = req.session.developer;
@@ -141,7 +193,7 @@ router.get('/info/:app_id', function(req, res, next) {
             
             var info = JSON.parse(body);
             
-            if (info['routerStatus'] == 'Success' && info['isAuth']){
+            if (info['routerStatus'] == 'Success' && info['isAuth'] == 'true'){
 
                 dbHandler.dbactions.selectData(dbcon, 'applications', '*', [['id', req.params.app_id, 0]], 1, function(result){
 
