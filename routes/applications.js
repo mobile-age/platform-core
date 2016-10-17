@@ -14,6 +14,118 @@ var dbHandler = require('../models/dbHandler');
 
 var config = require('../general_config');
 
+// Authentication
+var auth = require('../models/auth');
+
+// Containers actions
+var containers_actions = require('../models/containers_actions');
+
+// Application actions
+var apps_actions = require('../models/apps_actions');
+
+// Repositories actions
+var repos_actions = require('../models/repos_actions');
+
+// BD procedures
+var db_procedures = require('../models/db_procedures');
+
+router.get('/instantiate/:app_id/:image_tag', function(req, res, next) {
+    
+    var user = 'mobileage';
+    
+    var send = {};
+    
+    auth.auth.devIsAuth(dbcon, dbHandler, user, function(result){
+        
+        if (result['queryStatus'] == 'Success' && result['isAuth'] == 'true'){
+            
+            containers_actions.containers_actions.get_available_port(function(result){
+                
+                if (result["routerStatus"] == "Success"){
+                    console.log(result);
+                    
+                    var port = result["info"]["available_port"];
+                    
+                    containers_actions.containers_actions.deploy_container(req.params.app_id, req.params.image_tag, port, function(result){
+                    
+                        if (result["routerStatus"] == "Success"){
+                            
+                            var container_id = result["info"]["container_id"];
+                            
+                            apps_actions.apps_actions.get_name_by_id(req.params.app_id, function(result){
+                                
+                                if (result["routerStatus"] == "Success"){
+                                    
+                                    var app_name = result["info"]["app_name"];
+                                    
+                                    repos_actions.repos_actions.create_repo(app_name, function(result){
+                                        
+                                        if (result["routerStatus"] == "Success"){
+                                            
+                                            db_procedures.db_procedures.init_app(container_id, req.params.image_tag, req.params.app_id, result["info"]["repository_details"]["id"], port, user, function(result){
+                                                
+                                                if (result["routerStatus"] == "Success"){
+                                                    
+                                                    send["routerStatus"] = "Success";
+                                                    send["routerMessage"] = "Application instantiation performed successfully";
+                                                
+                                                    res.json(send);
+                                                }
+                                                else{
+                                                    
+                                                    send["routerStatus"] = "Failure";
+                                                    send["routerMessage"] = "db_procedures.init_app function failed";
+
+                                                    res.json(send);
+                                                }
+                                            });
+                                        }
+                                        else{
+                                         
+                                            send["routerStatus"] = "Failure";
+                                            send["routerMessage"] = "create_repo function failed";
+
+                                            res.json(send);
+                                        }
+                                    })
+                                    
+                                }
+                                else{
+                                    
+                                    send["routerStatus"] = "Failure";
+                                    send["routerMessage"] = "get_name_by_id function failed";
+                                    
+                                    res.json(send);
+                                }
+                            })
+                        }
+                        else{
+                            
+                            send["routerStatus"] = "Failure";
+                            send["routerMessage"] = "deploy_container function failed";
+                            
+                            res.json(send);
+                        }
+                    });
+                    
+                }
+                else{
+                    
+                    send["routerStatus"] = "Failure";
+                    send["routerMessage"] = "get_available_port function failed";
+                    
+                    res.json(send);
+                }
+            });
+        }
+        else{
+            send["routerStatus"] = "Failure";
+            send["routerMessage"] = "authentication failed";
+
+            res.json(send);
+        }
+    });
+});
 
 router.get('/add/:name', function(req, res, next) {
     
