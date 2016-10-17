@@ -42,11 +42,10 @@ router.get('/create/:repo_name', function(req, res, next) {
             if (info['routerStatus'] == 'Success' && info['isAuth']){
             
                 request.post({
-                url: config.appsVM + '/repos/users/username',
-                form:{
-                    username: user
-                }
-                
+                    url: config.appsVM + '/repos/users/username',
+                    form:{
+                        username: user
+                    }
                 },function(error, response, body){
 
                     if (error){
