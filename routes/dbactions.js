@@ -11,23 +11,23 @@ var dbcon = require('../models/dbconnect');
 var dbHandler = require('../models/dbHandler');
 
 // General configuration
-var config = require('../general_config');
+var config = require('../config/general_config');
 
 // Authentication
 var auth = require('../models/auth');
 
 
 router.post('/updateDB/initiateApp', function(req, res, next) {
-    
+
     var container_id = req.body.container_id;
     var image_tag = req.body.image_tag;
     var app_id = req.body.app_id;
     var repo_id = req.body.repo_id;
     var port = req.body.port;
     var user = req.body.user;
-    
+
     var send = {};
-    
+
     dbHandler.dbactions.create_rows(dbcon, 'containers', [['container_id', container_id], ['image_id', image_tag], ['developer_id', user], ['active', 1], ['port', port]], function(result){
 
         if(result['queryStatus'] == 'Success'){

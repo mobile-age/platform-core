@@ -12,35 +12,35 @@ var dbHandler = require('../models/dbHandler');
 
 // General configuration
 
-var config = require('../general_config');
+var config = require('../config/general_config');
 
 
 router.get('/create/:repo_name', function(req, res, next) {
-    
+
     //var user = req.session.developer;
     var user = 'mobileage';
-    
+
     var send = {};
-    
+
     request.post({
         url: 'http://localhost:5000/developers/isAuth',
         form: {
             key: user
         }
     }, function(error, response, body){
-        
+
         if(error){
             send["routerStatus"] = "Failure";
             send["routerMessage"] = "Internal Error";
-            
+
             res.json(send);
         }
         else{
 
             var info = JSON.parse(body);
-            
+
             if (info['routerStatus'] == 'Success' && info['isAuth']){
-            
+
                 request.post({
                     url: config.appsVM + '/repos/users/username',
                     form:{
@@ -56,13 +56,13 @@ router.get('/create/:repo_name', function(req, res, next) {
                         res.json(send);
                     }
                     else{
-                        
+
                         var info = JSON.parse(body);
-                         
+
                         if (info["routerStatus"] == "Success"){
-                            
+
                             if (info['info'].length > 0){
-                                
+
                                 request.post({
                                     url: config.appsVM + '/repos/project/create',
                                     form:{
@@ -87,7 +87,7 @@ router.get('/create/:repo_name', function(req, res, next) {
                                             send["routerStatus"] = "Success";
                                             send["routerMessage"] = "Repository created successfully";
                                             send["info"] = out;
-                                            
+
                                             res.json(send);
                                         }
                                         else{
@@ -108,15 +108,15 @@ router.get('/create/:repo_name', function(req, res, next) {
                             }
                         }
                         else{
-                            
+
                             send["routerStatus"] = "Failure";
                             send["routerMessage"] = "Apps VM route failed";
 
                             res.json(send);
                         }
                     }
-                });        
-            }       
+                });
+            }
         }
     });
 });

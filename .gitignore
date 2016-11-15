@@ -36,10 +36,7 @@ public/bower_components
 .node_repl_history
 
 # Database Credentials
-db-credentials.js
-
-# sudoer credentials
-scripts/config.sh
+config/db-credentials.js
 
 # general configuration
-general_config.js
+config/general_config.js

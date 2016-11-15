@@ -1,0 +1,2 @@
+Create the files db-credentials.js and general_config.js and place them in this
+folder according with the guidelines provided in README.md
